@@ -1,0 +1,67 @@
+{
+com.badlogic.gdx.graphics.g2d.BitmapFont: { 
+	default-font: { file: font/default.fnt },
+	android-font:{file: font/android.fnt},
+	andy-font:{file: font/andy3.fnt},
+	fennario-font:{file : font/fennario.fnt},
+	thuphap-font:{file : font/thuphap.fnt},
+	angry-font:{file : font/angry.fnt},
+	angry2-font:{file : font/angry2.fnt},
+},
+com.badlogic.gdx.graphics.Color: {
+	green: { a: 1, b: 0, g: 1, r: 0 },
+	white: { a: 1, b: 1, g: 1, r: 1 },
+	red: { a: 1, b: 0, g: 0, r: 1 },
+	black: { a: 1, b: 0, g: 0, r: 0 },
+	blue: {a: 1, b:1 , g: 1, r: 0 }
+},
+
+com.badlogic.gdx.graphics.g2d.NinePatch: {
+    
+},
+
+com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
+	
+},
+com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+	
+},
+com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+	default: { up: button-green-up, down: button-green-down, font: default-font, fontColor: red}
+},
+com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
+	
+},
+com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle: {
+	
+},
+com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
+	
+},
+com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
+	
+},
+com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
+	
+},
+com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+	default: { font: default-font, fontColor: white },
+	label-android-font: { font: android-font, fontColor: white },
+	label-andy-font: { font: andy-font, fontColor: white },
+},
+com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
+	
+},
+com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
+	
+},
+com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
+	
+},
+com.badlogic.gdx.scenes.scene2d.ui.Touchpad$TouchpadStyle: {
+	
+},
+com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle: {
+	
+}
+}
