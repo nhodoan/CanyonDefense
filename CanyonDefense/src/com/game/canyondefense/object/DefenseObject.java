@@ -6,6 +6,8 @@ public class DefenseObject {
 	private float x,y,width,height;
 	private float power;
 	private TextureRegion textureRegion_normal, textureRegion_press;
+	private boolean isPress;
+	private float radius_attack;
 	public float getX() {
 		return x;
 	}
@@ -36,17 +38,39 @@ public class DefenseObject {
 	public void setPower(float power) {
 		this.power = power;
 	}
-	public TextureRegion getTextureRegion_normal() {
+	
+	
+	
+	public float getRadius_attack() {
+	    return radius_attack;
+	}
+	public void setRadius_attack(float radius_attack) {
+	    this.radius_attack = radius_attack;
+	}
+	public boolean isPress() {
+	    return isPress;
+	}
+	public void setPress(boolean isPress) {
+	    this.isPress = isPress;
+	}
+	public TextureRegion getTexture(){
+	    if(isPress)
+		return getTextureRegion_press();
+	    return getTextureRegion_normal();
+	}
+	private TextureRegion getTextureRegion_normal() {
 		return textureRegion_normal;
 	}
-	public void setTextureRegion_normal(TextureRegion textureRegion_normal) {
-		this.textureRegion_normal = textureRegion_normal;
-	}
-	public TextureRegion getTextureRegion_press() {
+	private TextureRegion getTextureRegion_press() {
 		return textureRegion_press;
 	}
-	public void setTextureRegion_press(TextureRegion textureRegion_press) {
-		this.textureRegion_press = textureRegion_press;
+	
+	public boolean isInBound(float x_press,float y_press){
+	    if (this.x < x_press && x_press < this.x + this.width
+			&& this.y < y_press && y_press < this.y + this.height)
+		return true;
+	else
+		return false;
 	}
 	
 	

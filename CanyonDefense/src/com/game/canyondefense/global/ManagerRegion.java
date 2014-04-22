@@ -22,6 +22,9 @@ public class ManagerRegion {
 	public static TextureRegion diff_normal;
 	public static TextureRegion diff_hard;	
 	
+	
+	public static TextureRegion landmarkdefense;
+	
 	public static void init(){
 		TextureAtlas atlas = GameControl.getAtlas();
 		start_play = atlas.findRegion("startscreen/start_play");

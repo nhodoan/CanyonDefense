@@ -18,6 +18,8 @@ public class AreaObject {
 		this.id = id;
 		switch (id) {
 
+		/*Object in Start Screen*/
+		
 		case IDObject.START_PLAY:
 			x = Position.START_PLAY_X;
 			y = Position.START_PLAY_Y;
@@ -42,6 +44,9 @@ public class AreaObject {
 			myTexture = ManagerRegion.start_high_score;
 			myTextureWait = ManagerRegion.start_high_score_press;
 			break;
+			
+		/*Object in select map screen*/
+			
 		case IDObject.MAP_1:
 			x = Position.MAP_1_X;
 			y = Position.MAP_1_Y;
@@ -66,6 +71,37 @@ public class AreaObject {
 			myTexture = ManagerRegion.map_3;
 			myTextureWait = ManagerRegion.map_3_press;
 			break;
+			
+		/* Object in select difficult screen */
+		case IDObject.DIFF_EASY:
+			x = Position.DIFF_EASY_X;
+			y = Position.DIFF_EASY_Y;
+			width = Dimension.DIFF_EASY_W;
+			height = Dimension.DIFF_EASY_H;
+			myTexture = ManagerRegion.map_1;
+			myTextureWait = ManagerRegion.map_1_press;
+			break;
+		case IDObject.DIFF_NORMAL:
+			x = Position.DIFF_NORMAL_X;
+			y = Position.DIFF_NORMAL_Y;
+			width = Dimension.DIFF_NORMAL_W;
+			height = Dimension.DIFF_NORMAL_H;
+			myTexture = ManagerRegion.map_2;
+			myTextureWait = ManagerRegion.map_2_press;
+			break;
+		case IDObject.DIFF_HARD:
+			x = Position.DIFF_HARD_X;
+			y = Position.DIFF_HARD_Y;
+			width = Dimension.DIFF_HARD_W;
+			height = Dimension.DIFF_HARD_H;
+			myTexture = ManagerRegion.map_3;
+			myTextureWait = ManagerRegion.map_3_press;
+			break;
+			
+		/*Object in Play screen*/
+			
+		
+		
 		}
 		
 		

@@ -9,6 +9,7 @@ public class AttackObject {
 	private TextureRegion texture;
 	private float blood;
 	private int id;
+	private boolean isDead;
 	public AttackObject(int id){
 		switch(id){
 		case 0:
@@ -20,8 +21,20 @@ public class AttackObject {
 			blood = 50;
 			break;
 		}
+		isDead = false;
 	}
 	
+	
+	public boolean isDead() {
+	    return isDead;
+	}
+
+
+	public void setDead(boolean isDead) {
+	    this.isDead = isDead;
+	}
+
+
 	public int getId(){
 		return this.id;
 	}

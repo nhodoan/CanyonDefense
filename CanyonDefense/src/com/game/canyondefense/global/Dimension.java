@@ -32,11 +32,21 @@ public class Dimension {
 	 * Dimension of Difficult Select Screen
 	 */
 
-	public static float DIFF_EASY_W;
-	public static float DIFF_EASY_H;
-	public static float DIFF_NORMAL_W;
-	public static float DIFF_NORMAL_H;
-	public static float DIFF_HARD_W;
-	public static float DIFF_HARD_H;
+	public static float DIFF_EASY_W = width * 100 / 640;
+	public static float DIFF_EASY_H = width * 100 / 640;
+	public static float DIFF_NORMAL_W = width * 100 / 640;
+	public static float DIFF_NORMAL_H = width * 100 / 640;
+	public static float DIFF_HARD_W = width * 100 / 640;
+	public static float DIFF_HARD_H = width * 100 / 640;
+	
+	/**
+	     * Position of Play Screen
+	     */
+	    
+	    	/*Position of Menu in Play Screen*/
+	
+		public static float BG_W = width * 480/800;
+		public static float BG_H = height;
+	    	/*Position of Main Play in Play Screen*/
 
 }
