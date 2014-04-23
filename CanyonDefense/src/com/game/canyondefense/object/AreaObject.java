@@ -25,24 +25,24 @@ public class AreaObject {
 			y = Position.START_PLAY_Y;
 			width = Dimension.START_PLAY_W;
 			height = Dimension.START_PLAY_H;
-			myTexture = ManagerRegion.start_play;
-			myTextureWait = ManagerRegion.start_play_press;
+			myTexture = ManagerRegion.new_game_normal;
+			myTextureWait = ManagerRegion.new_game_press;
 			break;
 		case IDObject.START_HELP:
 			x = Position.START_HELP_X;
 			y = Position.START_HELP_Y;
 			width = Dimension.START_HELP_W;
 			height = Dimension.START_HELP_H;
-			myTexture = ManagerRegion.start_help;
-			myTextureWait = ManagerRegion.start_help_press;
+			myTexture = ManagerRegion.help_normal;
+			myTextureWait = ManagerRegion.help_press;
 			break;
 		case IDObject.START_HIGH_SCORE:
 			x = Position.START_HIGH_SCORE_X;
 			y = Position.START_HIGH_SCORE_Y;
 			width = Dimension.START_HIGH_SCORE_W;
 			height = Dimension.START_HIGH_SCORE_H;
-			myTexture = ManagerRegion.start_high_score;
-			myTextureWait = ManagerRegion.start_high_score_press;
+			myTexture = ManagerRegion.high_score_normal;
+			myTextureWait = ManagerRegion.high_score_press;
 			break;
 			
 		/*Object in select map screen*/
@@ -78,29 +78,78 @@ public class AreaObject {
 			y = Position.DIFF_EASY_Y;
 			width = Dimension.DIFF_EASY_W;
 			height = Dimension.DIFF_EASY_H;
-			myTexture = ManagerRegion.map_1;
-			myTextureWait = ManagerRegion.map_1_press;
+			myTexture = ManagerRegion.diff_easy_normal;
+			myTextureWait = ManagerRegion.diff_easy_press;
 			break;
 		case IDObject.DIFF_NORMAL:
 			x = Position.DIFF_NORMAL_X;
 			y = Position.DIFF_NORMAL_Y;
 			width = Dimension.DIFF_NORMAL_W;
 			height = Dimension.DIFF_NORMAL_H;
-			myTexture = ManagerRegion.map_2;
-			myTextureWait = ManagerRegion.map_2_press;
+			myTexture = ManagerRegion.diff_medium_normal;
+			myTextureWait = ManagerRegion.diff_medium_press;
 			break;
 		case IDObject.DIFF_HARD:
 			x = Position.DIFF_HARD_X;
 			y = Position.DIFF_HARD_Y;
 			width = Dimension.DIFF_HARD_W;
 			height = Dimension.DIFF_HARD_H;
-			myTexture = ManagerRegion.map_3;
-			myTextureWait = ManagerRegion.map_3_press;
+			myTexture = ManagerRegion.diff_hard_normal;
+			myTextureWait = ManagerRegion.diff_hard_press;
 			break;
 			
 		/*Object in Play screen*/
 			
-		
+		case IDObject.PLAY_MENU_PLAY:
+			x = Position.PLAY_MENU_PLAY_X;
+			y = Position.PLAY_MENU_PLAY_Y;
+			width = Dimension.PLAY_MENU_PLAY_W;
+			height = Dimension.PLAY_MENU_PLAY_H;
+			myTexture = ManagerRegion.play_menu_play;
+			myTextureWait = ManagerRegion.play_menu_play;
+			break;
+		case IDObject.PLAY_MENU_SOUND:
+			x = Position.PLAY_MENU_SOUND_X;
+			y = Position.PLAY_MENU_SOUND_Y;
+			width = Dimension.PLAY_MENU_SOUND_W;
+			height = Dimension.PLAY_MENU_SOUND_H;
+			myTexture = ManagerRegion.play_menu_sound;
+			myTextureWait = ManagerRegion.play_menu_sound;
+			break;
+		case IDObject.PLAY_MENU_QUIT:
+			x = Position.PLAY_MENU_QUIT_X;
+			y = Position.PLAY_MENU_QUIT_Y;
+			width = Dimension.PLAY_MENU_QUIT_W;
+			height = Dimension.PLAY_MENU_QUIT_H;
+			myTexture = ManagerRegion.play_menu_quit;
+			myTextureWait = ManagerRegion.play_menu_quit;
+			break;
+			
+		case IDObject.PLAY_MENU_DEFENSE_1:
+			x = Position.PLAY_MENU_DEFENSE_1_X;
+			y = Position.PLAY_MENU_DEFENSE_1_Y;
+			width = Dimension.PLAY_MENU_DEFENSE_1_W;
+			height = Dimension.PLAY_MENU_DEFENSE_1_H;
+			myTexture = ManagerRegion.play_menu_defense_1;
+			myTextureWait = ManagerRegion.play_menu_defense_1;
+			break;
+		case IDObject.PLAY_MENU_DEFENSE_2:
+			x = Position.PLAY_MENU_DEFENSE_2_X;
+			y = Position.PLAY_MENU_DEFENSE_2_Y;
+			width = Dimension.PLAY_MENU_DEFENSE_2_W;
+			height = Dimension.PLAY_MENU_DEFENSE_2_H;
+			myTexture = ManagerRegion.play_menu_defense_2;
+			myTextureWait = ManagerRegion.play_menu_defense_2;
+			break;
+		case IDObject.PLAY_MENU_DEFENSE_3:
+			x = Position.PLAY_MENU_DEFENSE_3_X;
+			y = Position.PLAY_MENU_DEFENSE_3_Y;
+			width = Dimension.PLAY_MENU_DEFENSE_3_W;
+			height = Dimension.PLAY_MENU_DEFENSE_3_H;
+			myTexture = ManagerRegion.play_menu_defense_3;
+			myTextureWait = ManagerRegion.play_menu_defense_3;
+			break;
+			
 		
 		}
 		

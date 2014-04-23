@@ -1,0 +1,32 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	new file:   CanyonDefense-desktop/bin/.gitignore
+#	modified:   CanyonDefense-desktop/bin/com/game/canyondefense/Main.class
+#	modified:   CanyonDefense-desktop/src/com/game/canyondefense/Main.java
+#	modified:   CanyonDefense/bin/com/game/canyondefense/global/Dimension.class
+#	modified:   CanyonDefense/bin/com/game/canyondefense/global/IDObject.class
+#	modified:   CanyonDefense/bin/com/game/canyondefense/global/ManagerRegion.class
+#	modified:   CanyonDefense/bin/com/game/canyondefense/global/Position.class
+#	modified:   CanyonDefense/bin/com/game/canyondefense/object/AreaObject.class
+#	modified:   CanyonDefense/bin/com/game/canyondefense/object/AttackAirObject.class
+#	modified:   CanyonDefense/bin/com/game/canyondefense/object/AttackObject.class
+#	modified:   CanyonDefense/bin/com/game/canyondefense/object/Bullet.class
+#	modified:   CanyonDefense/bin/com/game/canyondefense/object/DefenseObject.class
+#	modified:   CanyonDefense/bin/com/game/canyondefense/screen/PlayScreen.class
+#	modified:   CanyonDefense/src/com/game/canyondefense/global/Dimension.java
+#	modified:   CanyonDefense/src/com/game/canyondefense/global/IDObject.java
+#	modified:   CanyonDefense/src/com/game/canyondefense/global/ManagerRegion.java
+#	modified:   CanyonDefense/src/com/game/canyondefense/global/Position.java
+#	modified:   CanyonDefense/src/com/game/canyondefense/object/AreaObject.java
+#	modified:   CanyonDefense/src/com/game/canyondefense/object/AttackAirObject.java
+#	modified:   CanyonDefense/src/com/game/canyondefense/object/AttackObject.java
+#	modified:   CanyonDefense/src/com/game/canyondefense/object/Bullet.java
+#	modified:   CanyonDefense/src/com/game/canyondefense/object/DefenseObject.java
+#	modified:   CanyonDefense/src/com/game/canyondefense/screen/PlayScreen.java
+#
+
