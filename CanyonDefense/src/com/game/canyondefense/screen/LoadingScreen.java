@@ -75,9 +75,9 @@ public class LoadingScreen implements Screen {
 		// sb.draw(loadingBar, 100 * width / 720, 300 * height / 1280, (percent
 		// * maxLength + timeOffset / 5)
 		// * width / 720, 100 * height / 1280);
-		sb.draw(loadingBar, 150 * width / 720, 300 * height / 1280, percent
+		sb.draw(loadingBar, 150 * width / 720, 320 * height / 1280, percent
 				* 200 * width / 720 + timeOffset * 200 * width / 720 / 7000,
-				100 * height / 1280);
+				70 * height / 1280);
 
 		sb.draw(loadingFrame, 100 * width / 720, 300 * height / 1280,
 				500 * width / 720, 100 * height / 1280);
@@ -99,7 +99,7 @@ public class LoadingScreen implements Screen {
 					e.printStackTrace();
 				}finally{
 					GameControl.getManagerScreen().creatScreen(
-							ManagerScreen.SCREEN_START);
+							ManagerScreen.SCREEN_PLAY);
 				}
 				
 //			}

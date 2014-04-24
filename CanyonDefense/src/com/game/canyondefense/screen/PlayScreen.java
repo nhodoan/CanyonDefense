@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.game.canyondefense.GameControl;
 import com.game.canyondefense.global.Dimension;
 import com.game.canyondefense.global.IDObject;
+import com.game.canyondefense.global.IDPerson;
 import com.game.canyondefense.global.ManagerRegion;
 import com.game.canyondefense.global.MapData;
 import com.game.canyondefense.global.Position;
@@ -24,9 +25,9 @@ import com.game.canyondefense.object.DefenseObject;
 
 public class PlayScreen extends BaseScreen implements InputProcessor {
     private final String TAG = "Play Screen";
-    AtlasRegion bg;
-    long timeStart = 0l;
+    AtlasRegion bg;;
 
+    public static boolean isSound = true;
     public static int map;
     public static int level;
     public static int number_wave_current, number_wave_max;
@@ -48,6 +49,12 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
     private boolean isPlay = true;
     private boolean isAttack = false;
 
+    private AttackGroundObject testAttack;
+    private long timeStartWave;
+    private boolean startWave = true;
+
+    private Integer[] mapData;
+
     @Override
     public void show() {
 	// TODO Auto-generated method stub
@@ -56,10 +63,13 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	Gdx.input.setInputProcessor(this);
 
 	/* Init data */
+	mapData = MapData.map1;
 	list_attack_object = new ArrayList<AttackObject>();
-	list_attack_data = new ArrayList<Integer>();
+	// list_attack_object.add(new Att)
 	list_attack_data = new ArrayList<Integer>();
 	list_bullet = new ArrayList<Bullet>();
+
+	testAttack = new AttackGroundObject(IDPerson.ATTACK_GROUND_1);
 	/* Init object */
 
 	bg = GameControl.getAtlas().findRegion("data/loading");
@@ -77,7 +87,7 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	play_attack = new AreaObject(IDObject.PLAY_MENU_ATTACK);
 	sell_object = new AreaObject(IDObject.PLAY_MENU_SELL);
 
-	timeStart = System.currentTimeMillis();
+	// timeStart = System.currentTimeMillis();
     }
 
     @Override
@@ -95,9 +105,17 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	/* Render map */
 	for (int i = 0; i < 12; i++) {
 	    for (int j = 0; j < 12; j++) {
-		if (MapData.map1[i * 12 + j] == 0) {
+		if (mapData[i * 12 + j] == 0) {
 		    sb.draw(ManagerRegion.brick, j * Dimension.BRICK_W, height
-			    - (i+1) * Dimension.BRICK_H, Dimension.BRICK_W,
+			    - (i + 1) * Dimension.BRICK_H, Dimension.BRICK_W,
+			    Dimension.BRICK_H);
+		} else if (mapData[i * 12 + j] == 1) {
+		    sb.draw(ManagerRegion.ground, j * Dimension.BRICK_W, height
+			    - (i + 1) * Dimension.BRICK_H, Dimension.BRICK_W,
+			    Dimension.BRICK_H);
+		} else {
+		    sb.draw(ManagerRegion.tree, j * Dimension.BRICK_W, height
+			    - (i + 1) * Dimension.BRICK_H, Dimension.BRICK_W,
 			    Dimension.BRICK_H);
 		}
 	    }
@@ -107,11 +125,21 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	 * Render menu bar here
 	 */
 
-	/* Render status bar game */
-	sb.draw(ManagerRegion.menu_bg, Position.MENU_X, Position.MENU_Y,
-		Dimension.MENU_W, Dimension.MENU_H);
+	/* Render control bar game */
+	// sb.draw(ManagerRegion.menu_bg, Position.MENU_X, Position.MENU_Y,
+	// Dimension.MENU_W, Dimension.MENU_H);
 	sb.draw(play_game.getTexture(), play_game.getX(), play_game.getY(),
 		play_game.getWidth(), play_game.getHeight());
+	if (isSound) {
+	    sound_game.setMyTexture(ManagerRegion.play_menu_sound_on_normal);
+	    sound_game.setMyTextureWait(ManagerRegion.play_menu_sound_on_press);
+
+	} else {
+	    sound_game.setMyTexture(ManagerRegion.play_menu_sound_off_normal);
+	    sound_game
+		    .setMyTextureWait(ManagerRegion.play_menu_sound_off_press);
+
+	}
 	sb.draw(sound_game.getTexture(), sound_game.getX(), sound_game.getY(),
 		sound_game.getWidth(), sound_game.getHeight());
 	sb.draw(quit_play_game.getTexture(), quit_play_game.getX(),
@@ -125,6 +153,11 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 		defense_2.getWidth(), defense_2.getHeight());
 	sb.draw(defense_3.getTexture(), defense_3.getX(), defense_3.getY(),
 		defense_3.getWidth(), defense_3.getHeight());
+
+	/* Test attack move */
+
+	sb.draw(testAttack.getTexture(), testAttack.getX(), testAttack.getY(),
+		testAttack.getWidth(), testAttack.getHeight());
 
 	// sb.draw(play_attack.getTexture(),play_attack.getX(),play_attack.getY(),play_attack.getWidth(),play_attack.getHeight());
 	//
@@ -165,6 +198,10 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	//
 
 	sb.end();
+
+	if (!isPlay) {
+	    /* Render dialog show game is paused */
+	}
 	stage.draw();
 	update(arg0);
     }
@@ -173,6 +210,92 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 
 	if (isPlay) {
 
+	    // Control move of attack
+
+	    int currentI = (int) (testAttack.getX() * 2 / Dimension.BRICK_W);
+	    int currentJ = (int) (testAttack.getY() * 2 / Dimension.BRICK_H);
+
+	    boolean checkDirection = false;
+	    if (currentJ % 2 == 0) {
+		if (testAttack.getStatusMove() == AttackGroundObject.DOWN) {
+		    checkDirection = true;
+		}
+	    } else {
+		if (testAttack.getStatusMove() == AttackGroundObject.UP) {
+		    checkDirection = true;
+		}
+	    }
+
+	    if (currentI % 2 == 0) {
+		if (testAttack.getStatusMove() == AttackGroundObject.RIGHT) {
+		    checkDirection = true;
+		}
+	    } else {
+		if (testAttack.getStatusMove() == AttackGroundObject.LEFT) {
+		    checkDirection = true;
+		}
+	    }
+	    if (checkDirection) {
+		currentI = currentI / 2;
+		currentJ = 11 - currentJ / 2;
+		if (testAttack.getStatusMove() == AttackGroundObject.DOWN) {
+		    if (mapData[currentI + (currentJ + 1) * 12] != 0) {
+			if (mapData[currentI + 1 + currentJ * 12] == 0) {
+			    testAttack.setStatusMove(AttackGroundObject.RIGHT);
+			    testAttack
+				    .setY((11 - currentJ) * Dimension.BRICK_H);
+			    ;
+			} else {
+			    testAttack.setStatusMove(AttackGroundObject.LEFT);
+			    testAttack
+				    .setY((11 - currentJ) * Dimension.BRICK_H);
+			    ;
+			}
+		    }
+
+		} else if (testAttack.getStatusMove() == AttackGroundObject.UP) {
+		    if (mapData[currentI + (currentJ - 1) * 12] != 0) {
+			if (mapData[currentI + 1 + currentJ * 12] == 0) {
+			    testAttack.setStatusMove(AttackGroundObject.RIGHT);
+			    testAttack
+				    .setY((11 - currentJ) * Dimension.BRICK_H);
+			    ;
+			} else {
+			    testAttack.setStatusMove(AttackGroundObject.LEFT);
+			    testAttack
+				    .setY((11 - currentJ) * Dimension.BRICK_H);
+			    ;
+			}
+		    }
+		} else if (testAttack.getStatusMove() == AttackGroundObject.RIGHT) {
+		    if (mapData[currentI + 1 + currentJ * 12] != 0) {
+			if (mapData[currentI + (currentJ + 1) * 12] == 0) {
+			    testAttack.setStatusMove(AttackGroundObject.DOWN);
+			    testAttack.setX(currentI * Dimension.BRICK_W);
+			    ;
+			} else {
+			    testAttack.setX(currentI * Dimension.BRICK_W);
+			    ;
+			    testAttack.setStatusMove(AttackGroundObject.UP);
+			}
+		    }
+		} else if (testAttack.getStatusMove() == AttackGroundObject.LEFT) {
+		    if (mapData[currentI - 1 + currentJ * 12] != 0) {
+			if (mapData[currentI + (currentJ + 1) * 12] == 0) {
+			    testAttack.setStatusMove(AttackGroundObject.DOWN);
+			    testAttack.setX(currentI * Dimension.BRICK_W);
+			    ;
+			} else {
+			    testAttack.setStatusMove(AttackGroundObject.UP);
+			    testAttack.setX(currentI * Dimension.BRICK_W);
+			    ;
+			}
+		    }
+		}
+	    }
+	    testAttack.move(time);
+
+	    /* End control move of attacks */
 	}
 
     }
@@ -182,18 +305,20 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	// TODO Auto-generated method stub
 	float x = screenX;
 	float y = height - screenY;
+	if (play_game.isInBound(x, y)) {
+	    play_game.setCanPress(false);
+	    return true;
+	} else if (sound_game.isInBound(x, y)) {
+	    sound_game.setCanPress(false);
+	    return true;
+	} else if (quit_play_game.isInBound(x, y)) {
+	    quit_play_game.setCanPress(false);
+	    return true;
+	}
 	if (!isPlay) {
+
 	} else {
-	    if (play_game.isInBound(x, y)) {
-		play_game.setCanPress(false);
-		return true;
-	    } else if (sound_game.isInBound(x, y)) {
-		sound_game.setCanPress(false);
-		return true;
-	    } else if (quit_play_game.isInBound(x, y)) {
-		quit_play_game.setCanPress(false);
-		return true;
-	    } else if (defense_1.isInBound(x, y)) {
+	    if (defense_1.isInBound(x, y)) {
 		defense_1.setCanPress(false);
 		return true;
 	    } else if (defense_2.isInBound(x, y)) {
@@ -205,13 +330,16 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	    } else if (defense_2.isInBound(x, y)) {
 		defense_2.setCanPress(false);
 		return true;
+	    } else if (quit_play_game.isInBound(x, y)) {
+		quit_play_game.setCanPress(false);
 	    }
-	    for (DefenseObject defenseObject : list_defense_object) {
-		if (defenseObject.isInBound(x, y)) {
-		    defenseObject.setPress(false);
-		    break;
-		}
-	    }
+
+	    // for (DefenseObject defenseObject : list_defense_object) {
+	    // if (defenseObject.isInBound(x, y)) {
+	    // defenseObject.setPress(false);
+	    // break;
+	    // }
+	    // }
 	}
 
 	return super.touchDown(screenX, screenY, pointer, button);
@@ -231,11 +359,14 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	} else if (!sound_game.canPress()) {
 	    sound_game.setCanPress(true);
 	    if (sound_game.isInBound(x, y)) {
+		isSound = !isSound;
 		return true;
 	    }
 	} else if (!quit_play_game.canPress()) {
 	    quit_play_game.setCanPress(true);
 	    if (quit_play_game.isInBound(x, y)) {
+		GameControl.getManagerScreen().creatScreen(
+			ManagerScreen.SCREEN_START);
 		return true;
 	    }
 	} else if (!defense_1.canPress()) {

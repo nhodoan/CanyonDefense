@@ -1,96 +1,95 @@
 package com.game.canyondefense.object;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.game.canyondefense.global.Dimension;
+import com.game.canyondefense.global.IDPerson;
 import com.game.canyondefense.global.ManagerRegion;
 
 public class AttackObject {
-	private float x, y;
-	private float width, height;
-	private TextureRegion texture;
-	private float blood;
-	private int id;
-	private boolean isDead;
-	public AttackObject(int id){
-		switch(id){
-		case 0:
-			x = 0;
-			y = 0;
-			width = 0;
-			height= 0;
-			texture = ManagerRegion.map_1;
-			blood = 50;
-			break;
-		}
-		isDead = false;
-	}
-	
-	
-	public boolean isDead() {
-	    return isDead;
-	}
+    protected float x, y, speed;
+    private float width, height;
+    private float blood;
+    private int id;
+    protected TextureRegion allTextureRegion;
 
+    private boolean isDead;
 
-	public void setDead(boolean isDead) {
-	    this.isDead = isDead;
+    public AttackObject(int id) {
+	isDead = false;
+	width = Dimension.ATTACK_W;
+	height = Dimension.ATTACK_H;
+	switch (id) {
+	case IDPerson.ATTACK_GROUND_1:
+	    blood = 50;
+	    speed = 40;
+	    allTextureRegion = ManagerRegion.all_attack_ground_1;
+	    break;
+	case IDPerson.ATTACK_GROUND_2:
+	    blood = 100;
+	    allTextureRegion = ManagerRegion.all_attack_ground_2;
+	    break;
+	case IDPerson.ATTACK_AIR:
+	    allTextureRegion = ManagerRegion.all_attack_air;
+	    blood = 70;
+	    break;
 	}
 
+    }
 
-	public int getId(){
-		return this.id;
-	}
+    public boolean isDead() {
+	return isDead;
+    }
 
-	public float getX() {
-		return x;
-	}
+    public void setDead(boolean isDead) {
+	this.isDead = isDead;
+    }
 
-	public void setX(float x) {
-		this.x = x;
-	}
+    public int getId() {
+	return this.id;
+    }
 
-	public float getY() {
-		return y;
-	}
+    public float getX() {
+	return x;
+    }
 
-	public void setY(float y) {
-		this.y = y;
-	}
+    public void setX(float x) {
+	this.x = x;
+    }
 
-	public float getWidth() {
-		return width;
-	}
+    public float getY() {
+	return y;
+    }
 
-	public void setWidth(float width) {
-		this.width = width;
-	}
+    public void setY(float y) {
+	this.y = y;
+    }
 
-	public float getHeight() {
-		return height;
-	}
+    public float getWidth() {
+	return width;
+    }
 
-	public void setHeight(float height) {
-		this.height = height;
-	}
+    public void setWidth(float width) {
+	this.width = width;
+    }
 
-	
+    public float getHeight() {
+	return height;
+    }
 
-	public TextureRegion getTexture() {
-		return texture;
-	}
+    public void setHeight(float height) {
+	this.height = height;
+    }
 
-	public void setTexture(TextureRegion texture) {
-		this.texture = texture;
-	}
+    public void setId(int id) {
+	this.id = id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public float getBlood() {
+	return blood;
+    }
 
-	public float getBlood() {
-		return blood;
-	}
-
-	public void setBlood(float blood) {
-		this.blood = blood;
-	}
+    public void setBlood(float blood) {
+	this.blood = blood;
+    }
 
 }

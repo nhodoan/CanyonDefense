@@ -105,24 +105,24 @@ public class AreaObject {
 			y = Position.PLAY_MENU_PLAY_Y;
 			width = Dimension.PLAY_MENU_PLAY_W;
 			height = Dimension.PLAY_MENU_PLAY_H;
-			myTexture = ManagerRegion.play_menu_play;
-			myTextureWait = ManagerRegion.play_menu_play;
+			myTexture = ManagerRegion.play_menu_pause_normal;
+			myTextureWait = ManagerRegion.play_menu_pause_press;
 			break;
 		case IDObject.PLAY_MENU_SOUND:
 			x = Position.PLAY_MENU_SOUND_X;
 			y = Position.PLAY_MENU_SOUND_Y;
 			width = Dimension.PLAY_MENU_SOUND_W;
 			height = Dimension.PLAY_MENU_SOUND_H;
-			myTexture = ManagerRegion.play_menu_sound;
-			myTextureWait = ManagerRegion.play_menu_sound;
+			myTexture = ManagerRegion.play_menu_sound_on_normal;
+			myTextureWait = ManagerRegion.play_menu_sound_on_press;
 			break;
 		case IDObject.PLAY_MENU_QUIT:
 			x = Position.PLAY_MENU_QUIT_X;
 			y = Position.PLAY_MENU_QUIT_Y;
 			width = Dimension.PLAY_MENU_QUIT_W;
 			height = Dimension.PLAY_MENU_QUIT_H;
-			myTexture = ManagerRegion.play_menu_quit;
-			myTextureWait = ManagerRegion.play_menu_quit;
+			myTexture = ManagerRegion.play_menu_quit_normal;
+			myTextureWait = ManagerRegion.play_menu_quit_press;
 			break;
 			
 		case IDObject.PLAY_MENU_DEFENSE_1:
@@ -195,6 +195,16 @@ public class AreaObject {
 		} else {
 			return myTextureWait;
 		}
+	}
+	
+	
+
+	public void setMyTexture(TextureRegion myTexture) {
+	    this.myTexture = myTexture;
+	}
+
+	public void setMyTextureWait(TextureRegion myTextureWait) {
+	    this.myTextureWait = myTextureWait;
 	}
 
 	public void setCanPress(boolean canPress) {

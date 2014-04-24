@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.game.canyondefense.GameControl;
 import com.game.canyondefense.global.IDObject;
+import com.game.canyondefense.global.ManagerRegion;
 import com.game.canyondefense.object.AreaObject;
 
 public class StartScreen extends BaseScreen implements InputProcessor {
@@ -40,7 +41,8 @@ public class StartScreen extends BaseScreen implements InputProcessor {
 		camera.update();
 		stage.act(arg0);
 		sb.begin();
-
+		
+		sb.draw(ManagerRegion.star_bg, 0, 0, width, height);
 		/* Draw Texture Region here */
 		sb.draw(start_play.getTexture(), start_play.getX(), start_play.getY(),
 				start_play.getWidth(), start_play.getHeight());

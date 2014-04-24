@@ -8,7 +8,7 @@ public class Main {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "Canyon Defense";
 		cfg.useGL20 = false;
-		cfg.width = 800;
+		cfg.width = 640;
 		cfg.height = 480;		
 		new LwjglApplication(new GameControl(), cfg);
 	}

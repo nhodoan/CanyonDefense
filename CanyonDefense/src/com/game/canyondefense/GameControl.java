@@ -12,6 +12,8 @@ public class GameControl extends Game {
 	private static MySkin mySkin;
 	private static ManagerScreen managerScreen;
 	private static BitmapFont font;
+	public static float WIDTH_DEBUG = 640;
+	public static float HEIGHT_DEBUG = 480;
 	public GameControl() {
 	}
 

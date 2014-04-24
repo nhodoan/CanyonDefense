@@ -5,21 +5,21 @@ filter: Nearest,Nearest
 repeat: none
 loading
   rotate: false
-  xy: 1, 133
-  size: 720, 1280
-  orig: 720, 1280
+  xy: 1, 1
+  size: 640, 480
+  orig: 640, 480
   offset: 0, 0
   index: -1
 loadingframe
   rotate: false
-  xy: 1, 50
+  xy: 643, 400
   size: 464, 81
   orig: 464, 81
   offset: 0, 0
   index: -1
 loadingbar
   rotate: false
-  xy: 1, 1
+  xy: 643, 351
   size: 450, 47
   orig: 450, 47
   offset: 0, 0
