@@ -1,5 +1,6 @@
 package com.game.canyondefense.global;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -37,9 +38,12 @@ public class ManagerRegion {
 	public static TextureRegion play_menu_quit_normal;
 	public static TextureRegion play_menu_quit_press;
 	
-	public static TextureRegion play_menu_defense_1;
-	public static TextureRegion play_menu_defense_2;
-	public static TextureRegion play_menu_defense_3;
+	public static TextureRegion play_menu_defense_1_normal;
+	public static TextureRegion play_menu_defense_2_normal;
+	public static TextureRegion play_menu_defense_3_normal;
+	public static TextureRegion play_menu_defense_1_press;
+	public static TextureRegion play_menu_defense_2_press;
+	public static TextureRegion play_menu_defense_3_press;
 
 	public static TextureRegion landmarkdefense;
 	public static TextureRegion brick;
@@ -51,6 +55,21 @@ public class ManagerRegion {
 	public static TextureRegion all_attack_ground_1;
 	public static TextureRegion all_attack_ground_2;
 	public static TextureRegion all_attack_air;
+	
+	public static TextureRegion defense1_normal;
+	public static TextureRegion defense2_normal;
+	public static TextureRegion defense3_normal;
+	
+	public static TextureRegion defense1_press;
+	public static TextureRegion defense2_press;
+	public static TextureRegion defense3_press;
+	
+	public static TextureRegion bullet;
+	
+	public static TextureRegion frame_blood;
+	public static TextureRegion blood;
+	
+	public static TextureRegion circle_attack;
 	
 	public static void init(){
 		TextureAtlas atlas = GameControl.getAtlas();
@@ -87,9 +106,12 @@ public class ManagerRegion {
 		play_menu_sound_off_normal = GameControl.getAtlas().findRegion("playscreen/menu/sound_off_normal");
 		play_menu_sound_off_press = GameControl.getAtlas().findRegion("playscreen/menu/sound_off_press");
 		
-		play_menu_defense_1 = GameControl.getAtlas().findRegion("playscreen/menu/weapon_info_1_normal");
-		play_menu_defense_2 = GameControl.getAtlas().findRegion("playscreen/menu/weapon_info_2_normal");
-		play_menu_defense_3 = GameControl.getAtlas().findRegion("playscreen/menu/weapon_info_3_normal");
+		play_menu_defense_1_normal = GameControl.getAtlas().findRegion("playscreen/popup/defense1_select_normal");
+		play_menu_defense_2_normal = GameControl.getAtlas().findRegion("playscreen/popup/defense2_select_normal");
+		play_menu_defense_3_normal = GameControl.getAtlas().findRegion("playscreen/popup/defense3_select_normal");
+		play_menu_defense_1_press = GameControl.getAtlas().findRegion("playscreen/popup/defense1_select_press");
+		play_menu_defense_2_press = GameControl.getAtlas().findRegion("playscreen/popup/defense2_select_press");
+		play_menu_defense_3_press = GameControl.getAtlas().findRegion("playscreen/popup/defense3_select_press");
 //		
 		brick = GameControl.getAtlas().findRegion("playscreen/brick");
 		ground = GameControl.getAtlas().findRegion("playscreen/ground");
@@ -98,5 +120,21 @@ public class ManagerRegion {
 		all_attack_ground_1 = GameControl.getAtlas().findRegion("playscreen/attack/attack1");
 		all_attack_ground_2 = GameControl.getAtlas().findRegion("playscreen/attack/attack2");
 		all_attack_air = GameControl.getAtlas().findRegion("playscreen/attack/attack3");
+		
+		frame_blood = GameControl.getAtlas().findRegion("playscreen/attack/frame_blood");
+		blood = GameControl.getAtlas().findRegion("playscreen/attack/blood");
+			
+		
+		defense1_normal = GameControl.getAtlas().findRegion("playscreen/defense/defense1_normal");
+		defense2_normal = GameControl.getAtlas().findRegion("playscreen/defense/defense2_normal");
+		defense3_normal = GameControl.getAtlas().findRegion("playscreen/defense/defense3_normal");
+		
+		defense1_press = GameControl.getAtlas().findRegion("playscreen/defense/defense1_press");
+		defense2_press = GameControl.getAtlas().findRegion("playscreen/defense/defense2_press");
+		defense3_press = GameControl.getAtlas().findRegion("playscreen/defense/defense3_press");
+		circle_attack = GameControl.getAtlas().findRegion("playscreen/defense/circle");
+		
+		bullet = GameControl.getAtlas().findRegion("playscreen/bullet/shot1");
 	}
+	
 }

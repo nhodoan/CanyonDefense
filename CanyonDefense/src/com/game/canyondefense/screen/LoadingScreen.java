@@ -104,7 +104,7 @@ public class LoadingScreen implements Screen {
 				
 //			}
 		}
-		Gdx.app.log("percent", String.valueOf(percent * 100) + " %");
+		//Gdx.app.log("percent", String.valueOf(percent * 100) + " %");
 
 	}
 

@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.game.canyondefense.GameControl;
 
 public class Position {
-    
+
     private static float W = GameControl.WIDTH_DEBUG;
     private static float H = GameControl.HEIGHT_DEBUG;
     public static float width = Gdx.graphics.getWidth();
@@ -48,19 +48,28 @@ public class Position {
 
     public static float MENU_X = H * width / W;
     public static float MENU_Y = 0;
-    
+
     public static float PLAY_MENU_PLAY_X = 490 * width / W;
     public static float PLAY_MENU_PLAY_Y = 420 * height / H;
     public static float PLAY_MENU_SOUND_X = 540 * width / W;
     public static float PLAY_MENU_SOUND_Y = 420 * height / H;
     public static float PLAY_MENU_QUIT_X = 590 * width / W;
     public static float PLAY_MENU_QUIT_Y = 420 * height / H;
-    
+
     public static float PLAY_MENU_DEFENSE_1_X = 482 * width / W;
     public static float PLAY_MENU_DEFENSE_1_Y = 300 * height / H;
     public static float PLAY_MENU_DEFENSE_2_X = 534 * width / W;
     public static float PLAY_MENU_DEFENSE_2_Y = 300 * height / H;
     public static float PLAY_MENU_DEFENSE_3_X = 586 * width / W;
     public static float PLAY_MENU_DEFENSE_3_Y = 300 * height / H;
+
     /* Position of Main Play in Play Screen */
+
+    public static float genX(int x) {
+	return Dimension.BRICK_W * x;
+    }
+
+    public static float genY(int y) {
+	return Dimension.BRICK_H * (MapData.rows -1 - y);
+    }
 }
