@@ -15,7 +15,7 @@ public class DefenseObject {
 	
 	private long timeOldFire;
 	private int id;
-	
+	protected int type;
 	private int sale;
 	
 	public DefenseObject(int id){
@@ -37,10 +37,15 @@ public class DefenseObject {
 		textureRegion_press = ManagerRegion.defense2_press;
 		sale = Sale.GROUND_2;
 		break;
-	    case IDPerson.DEFENSE_AIR:
+	    case IDPerson.DEFENSE_AIR_1:
 		textureRegion_normal = ManagerRegion.defense3_normal;
 		textureRegion_press = ManagerRegion.defense3_press;
-		sale = Sale.AIR;
+		sale = Sale.AIR_1;
+		break;
+	    case IDPerson.DEFENSE_AIR_2:
+		textureRegion_normal = ManagerRegion.defense3_normal;
+		textureRegion_press = ManagerRegion.defense3_press;
+		sale = Sale.AIR_2;
 		break;
 	    }
 	}
@@ -113,6 +118,9 @@ public class DefenseObject {
 		return textureRegion_press;
 	}
 	
+	public int getType() {
+	    return type;
+	}
 	public boolean isInRadius(float x,float y){
 	    return (this.x + this.width/2 - x)*(this.x + this.width/2 - x) +
 		    (this.y + this.height/2 - y)*(this.y + this.height/2 - y)< radius_attack*radius_attack;

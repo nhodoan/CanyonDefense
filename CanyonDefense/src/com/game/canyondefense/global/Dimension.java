@@ -82,6 +82,8 @@ public class Dimension {
     public static float PLAY_MENU_DEFENSE_2_H = height * 30 / H;
     public static float PLAY_MENU_DEFENSE_3_W = width * 30 / W;
     public static float PLAY_MENU_DEFENSE_3_H = height * 30 / H;
+    public static float PLAY_MENU_DEFENSE_4_W = width * 30 / W;
+    public static float PLAY_MENU_DEFENSE_4_H = height * 30 / H;
     
     public static float PLAY_MENU_CIRCLE_SELECT_W = width * 80/W;
     public static float PLAY_MENU_CIRCLE_SELECT_H = width * 80/W;

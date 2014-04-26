@@ -15,7 +15,12 @@ public class AttackObject {
     protected TextureRegion texture;
     private boolean isStart;
     protected int statusMove;
+    protected int type;
     
+    public int getType() {
+        return type;
+    }
+
     private int gold;
 
     public static final int RIGHT = 0;
@@ -30,12 +35,13 @@ public class AttackObject {
     private boolean isDead;
 
     public AttackObject(int id) {
+	this.id = id;
 	isDead = false;
 	isStart = false;
 	width = Dimension.ATTACK_W;
 	height = Dimension.ATTACK_H;
-	x = 0;
-	y = Gdx.graphics.getHeight() - 4 * Dimension.BRICK_H;
+	
+	
 	statusMove = RIGHT;
 	switch (id) {
 	case IDPerson.ATTACK_GROUND_1:
@@ -50,13 +56,20 @@ public class AttackObject {
 	    allTextureRegion = ManagerRegion.all_attack_ground_2;
 	    gold = 120;
 	    break;
-	case IDPerson.ATTACK_AIR:
+	case IDPerson.ATTACK_AIR_1:
+	    allTextureRegion = ManagerRegion.all_attack_air;
+	    speed = 40;
+	    blood = 70;
+	    gold = 150;
+	    break;
+	case IDPerson.ATTACK_AIR_2:
 	    allTextureRegion = ManagerRegion.all_attack_air;
 	    speed = 40;
 	    blood = 70;
 	    gold = 150;
 	    break;
 	}
+	
 	max_blood = blood;
 
     }

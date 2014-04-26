@@ -11,6 +11,10 @@ public class Bullet {
     private float power;
     private float a, b;
     private float speed;
+    public static int TYPE_GROUND = 0;
+    public static int TYPE_AIR = 1;
+
+    private int type;
 
     public Bullet() {
 	speed = 10;
@@ -59,7 +63,13 @@ public class Bullet {
     public void setHeight(float height) {
 	this.height = height;
     }
+    public int getType() {
+        return type;
+    }
 
+    public void setType(int type) {
+        this.type = type;
+    }
     public float getPower() {
 	return power;
     }

@@ -125,19 +125,25 @@ public class AreaObject {
 			myTextureWait = ManagerRegion.play_menu_quit_press;
 			break;
 			
-		case IDObject.PLAY_MENU_DEFENSE_1:
+		case IDObject.PLAY_POPUP_DEFENSE_GROUND_1:
 			width = Dimension.PLAY_MENU_DEFENSE_1_W;
 			height = Dimension.PLAY_MENU_DEFENSE_1_H;
 			myTexture = ManagerRegion.play_menu_defense_1_normal;
 			myTextureWait = ManagerRegion.play_menu_defense_1_press;
 			break;
-		case IDObject.PLAY_MENU_DEFENSE_2:
+		case IDObject.PLAY_POPUP_DEFENSE_GROUND_2:
 			width = Dimension.PLAY_MENU_DEFENSE_2_W;
 			height = Dimension.PLAY_MENU_DEFENSE_2_H;
 			myTexture = ManagerRegion.play_menu_defense_2_normal;
 			myTextureWait = ManagerRegion.play_menu_defense_2_press;
 			break;
-		case IDObject.PLAY_MENU_DEFENSE_3:
+		case IDObject.PLAY_POPUP_DEFENSE_AIR_1:
+			width = Dimension.PLAY_MENU_DEFENSE_3_W;
+			height = Dimension.PLAY_MENU_DEFENSE_3_H;
+			myTexture = ManagerRegion.play_menu_defense_3_normal;
+			myTextureWait = ManagerRegion.play_menu_defense_3_press;
+			break;
+		case IDObject.PLAY_POPUP_DEFENSE_AIR_2:
 			width = Dimension.PLAY_MENU_DEFENSE_3_W;
 			height = Dimension.PLAY_MENU_DEFENSE_3_H;
 			myTexture = ManagerRegion.play_menu_defense_3_normal;

@@ -1,5 +1,6 @@
 package com.game.canyondefense.object;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.game.canyondefense.global.Dimension;
 
@@ -9,9 +10,11 @@ public class AttackGroundObject extends AttackObject {
 
     public AttackGroundObject(int id) {
 	super(id);
+	type = Bullet.TYPE_GROUND;
 	pUp = pDown = pLeft = pRight = 0;
 	texture = new TextureRegion(allTextureRegion, pDown * 40, 150, 40, 50);
-	x = Dimension.BRICK_W;
+	x = - Dimension.BRICK_W;
+	y = Gdx.graphics.getHeight() - 4 * Dimension.BRICK_H;
 
     }
 

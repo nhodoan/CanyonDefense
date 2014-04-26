@@ -30,14 +30,11 @@ public class IDObject {
 	public static final int PLAY_MENU_SOUND = 17;
 	public static final int PLAY_MENU_QUIT = 18;
 	
-	public static final int PLAY_MENU_DEFENSE_1 = 19;
-	public static final int PLAY_MENU_DEFENSE_2 = 20;
-	public static final int PLAY_MENU_DEFENSE_3 = 21;
+	public static final int PLAY_POPUP_DEFENSE_GROUND_1 = 19;
+	public static final int PLAY_POPUP_DEFENSE_GROUND_2 = 20;
+	public static final int PLAY_POPUP_DEFENSE_AIR_1 = 21;
+	public static final int PLAY_POPUP_DEFENSE_AIR_2 = 22;
 	
-	public static final int PLAY_MENU_ATTACK = 22;
 	public static final int PLAY_MENU_SELL = 23;
 	
-	public static final int PLAY_MENU_GUN_1 = 16;
-	public static final int PLAY_MENU_GUN_2 = 16;
-	public static final int PLAY_MENU_CRAKER = 16;
 }

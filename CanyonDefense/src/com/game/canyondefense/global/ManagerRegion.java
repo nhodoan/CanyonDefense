@@ -28,12 +28,11 @@ public class ManagerRegion {
     public static TextureRegion gold_frame, all_number, wave_frame,
 	    heart_frame;
 
-    public static TextureRegion play_menu_defense_1_normal;
-    public static TextureRegion play_menu_defense_2_normal;
-    public static TextureRegion play_menu_defense_3_normal;
-    public static TextureRegion play_menu_defense_1_press;
-    public static TextureRegion play_menu_defense_2_press;
-    public static TextureRegion play_menu_defense_3_press;
+    public static TextureRegion play_menu_defense_1_normal,
+	    play_menu_defense_2_normal, play_menu_defense_3_normal,
+	    play_menu_defense_4_normal, play_menu_defense_1_press,
+	    play_menu_defense_2_press, play_menu_defense_3_press,
+	    play_menu_defense_4_press;
 
     public static TextureRegion brick;
     public static TextureRegion ground;
@@ -44,7 +43,8 @@ public class ManagerRegion {
     public static TextureRegion all_attack_air;
 
     public static TextureRegion defense1_normal, defense2_normal,
-	    defense3_normal, defense1_press, defense2_press, defense3_press,circle_select;
+	    defense3_normal, defense1_press, defense2_press, defense3_press,
+	    circle_select;
 
     public static TextureRegion bullet;
 
@@ -104,14 +104,18 @@ public class ManagerRegion {
 		.findRegion("playscreen/popup/defense2_select_normal");
 	play_menu_defense_3_normal = atlas
 		.findRegion("playscreen/popup/defense3_select_normal");
+	play_menu_defense_4_normal = atlas
+		.findRegion("playscreen/popup/defense3_select_normal");
 	play_menu_defense_1_press = atlas
 		.findRegion("playscreen/popup/defense1_select_press");
 	play_menu_defense_2_press = atlas
 		.findRegion("playscreen/popup/defense2_select_press");
 	play_menu_defense_3_press = atlas
 		.findRegion("playscreen/popup/defense3_select_press");
+	play_menu_defense_4_press = atlas
+		.findRegion("playscreen/popup/defense3_select_press");
 	circle_select = atlas.findRegion("playscreen/popup/circle_defense");
-	
+
 	//
 	brick = atlas.findRegion("playscreen/brick");
 	ground = atlas.findRegion("playscreen/ground");
