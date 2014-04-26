@@ -255,84 +255,112 @@ filter: Nearest,Nearest
 repeat: none
 playscreen/menu/bg_menu
   rotate: false
-  xy: 1, 293
+  xy: 1, 289
   size: 467, 716
   orig: 467, 716
   offset: 0, 0
   index: -1
+playscreen/menu/number
+  rotate: false
+  xy: 1, 237
+  size: 616, 50
+  orig: 616, 50
+  offset: 0, 0
+  index: -1
+playscreen/menu/gold_frame
+  rotate: false
+  xy: 1, 171
+  size: 225, 64
+  orig: 225, 64
+  offset: 0, 0
+  index: -1
+playscreen/menu/wave_frame
+  rotate: false
+  xy: 470, 941
+  size: 199, 64
+  orig: 199, 64
+  offset: 0, 0
+  index: -1
+playscreen/menu/pause_normal
+  rotate: false
+  xy: 1, 67
+  size: 102, 102
+  orig: 102, 102
+  offset: 0, 0
+  index: -1
+playscreen/menu/pause_press
+  rotate: false
+  xy: 470, 837
+  size: 102, 102
+  orig: 102, 102
+  offset: 0, 0
+  index: -1
+playscreen/menu/heart_frame
+  rotate: false
+  xy: 228, 184
+  size: 146, 51
+  orig: 146, 51
+  offset: 0, 0
+  index: -1
 playscreen/menu/weapon_info_3_normal
   rotate: false
-  xy: 1, 181
+  xy: 470, 725
   size: 60, 110
   orig: 60, 110
   offset: 0, 0
   index: -1
 playscreen/menu/weapon_info_1_normal
   rotate: false
-  xy: 1, 67
+  xy: 470, 611
   size: 56, 112
   orig: 56, 112
   offset: 0, 0
   index: -1
 playscreen/menu/weapon_info_2_normal
   rotate: false
-  xy: 63, 179
+  xy: 470, 497
   size: 56, 112
   orig: 56, 112
   offset: 0, 0
   index: -1
-playscreen/menu/pause_normal
-  rotate: false
-  xy: 121, 227
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
-playscreen/menu/pause_press
-  rotate: false
-  xy: 187, 227
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
 playscreen/menu/quit_normal
   rotate: false
-  xy: 253, 227
+  xy: 671, 941
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 playscreen/menu/quit_press
   rotate: false
-  xy: 319, 227
+  xy: 1, 1
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 playscreen/menu/sound_off_normal
   rotate: false
-  xy: 385, 227
+  xy: 105, 105
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 playscreen/menu/sound_off_press
   rotate: false
-  xy: 1, 1
+  xy: 574, 875
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 playscreen/menu/sound_on_normal
   rotate: false
-  xy: 59, 113
+  xy: 737, 941
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 playscreen/menu/sound_on_press
   rotate: false
-  xy: 125, 161
+  xy: 640, 875
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
@@ -342,44 +370,51 @@ MoTa10.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+playscreen/popup/circle_defense
+  rotate: false
+  xy: 1, 125
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
 playscreen/popup/defense1_select_normal
   rotate: false
-  xy: 1, 1
+  xy: 1, 63
   size: 60, 60
   orig: 60, 60
   offset: 0, 0
   index: -1
 playscreen/popup/defense1_select_press
   rotate: false
-  xy: 63, 1
+  xy: 131, 193
   size: 60, 60
   orig: 60, 60
   offset: 0, 0
   index: -1
 playscreen/popup/defense2_select_normal
   rotate: false
-  xy: 125, 1
+  xy: 1, 1
   size: 60, 60
   orig: 60, 60
   offset: 0, 0
   index: -1
 playscreen/popup/defense2_select_press
   rotate: false
-  xy: 187, 1
+  xy: 63, 63
   size: 60, 60
   orig: 60, 60
   offset: 0, 0
   index: -1
 playscreen/popup/defense3_select_normal
   rotate: false
-  xy: 249, 1
+  xy: 131, 131
   size: 60, 60
   orig: 60, 60
   offset: 0, 0
   index: -1
 playscreen/popup/defense3_select_press
   rotate: false
-  xy: 311, 1
+  xy: 193, 193
   size: 60, 60
   orig: 60, 60
   offset: 0, 0

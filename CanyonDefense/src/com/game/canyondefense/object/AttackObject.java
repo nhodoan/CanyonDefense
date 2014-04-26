@@ -9,52 +9,60 @@ import com.game.canyondefense.global.ManagerRegion;
 public class AttackObject {
     protected float x, y, speed;
     private float width, height;
-    private float blood,max_blood;
+    private float blood, max_blood;
     private int id;
     protected TextureRegion allTextureRegion;
     protected TextureRegion texture;
     private boolean isStart;
     protected int statusMove;
     
+    private int gold;
+
     public static final int RIGHT = 0;
     public static final int LEFT = 1;
     public static final int DOWN = 2;
     public static final int UP = 3;
 
     public float getMax_blood() {
-        return max_blood;
+	return max_blood;
     }
 
     private boolean isDead;
-    
-
 
     public AttackObject(int id) {
 	isDead = false;
 	isStart = false;
 	width = Dimension.ATTACK_W;
 	height = Dimension.ATTACK_H;
-	y = Gdx.graphics.getHeight() - Dimension.BRICK_H * 3 / 2;
-	statusMove = DOWN;
+	x = 0;
+	y = Gdx.graphics.getHeight() - 4 * Dimension.BRICK_H;
+	statusMove = RIGHT;
 	switch (id) {
 	case IDPerson.ATTACK_GROUND_1:
 	    blood = 80;
 	    speed = 40;
 	    allTextureRegion = ManagerRegion.all_attack_ground_1;
+	    gold = 100;
 	    break;
 	case IDPerson.ATTACK_GROUND_2:
 	    blood = 90;
 	    speed = 50;
 	    allTextureRegion = ManagerRegion.all_attack_ground_2;
+	    gold = 120;
 	    break;
 	case IDPerson.ATTACK_AIR:
 	    allTextureRegion = ManagerRegion.all_attack_air;
 	    speed = 40;
 	    blood = 70;
+	    gold = 150;
 	    break;
 	}
 	max_blood = blood;
 
+    }
+
+    public int getGold() {
+        return gold;
     }
 
     public boolean isDead() {
@@ -132,17 +140,16 @@ public class AttackObject {
     public TextureRegion getTexture() {
 	return this.texture;
     }
-    
+
     public void move(float deltatime) {
 	// TODO Auto-generated method stub
-	
+
     }
-    
-    public void attack(float decreaseBlood){
+
+    public void attack(float decreaseBlood) {
 	this.blood -= decreaseBlood;
-	if(this.blood <= 0 )
+	if (this.blood <= 0)
 	    setDead(true);
     }
-    
-    
+
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.game.canyondefense.global.Dimension;
 import com.game.canyondefense.global.IDPerson;
 import com.game.canyondefense.global.ManagerRegion;
+import com.game.canyondefense.global.Sale;
 
 public class DefenseObject {
 	private float x,y,width,height;
@@ -14,6 +15,8 @@ public class DefenseObject {
 	
 	private long timeOldFire;
 	private int id;
+	
+	private int sale;
 	
 	public DefenseObject(int id){
 	    this.id = id;
@@ -27,16 +30,22 @@ public class DefenseObject {
 	    case IDPerson.DEFENSE_GROUND_1:
 		textureRegion_normal = ManagerRegion.defense1_normal;
 		textureRegion_press = ManagerRegion.defense1_press;
+		sale = Sale.GROUND_1;
 		break;
 	    case IDPerson.DEFENSE_GROUND_2:
 		textureRegion_normal = ManagerRegion.defense2_normal;
 		textureRegion_press = ManagerRegion.defense2_press;
+		sale = Sale.GROUND_2;
 		break;
 	    case IDPerson.DEFENSE_AIR:
 		textureRegion_normal = ManagerRegion.defense3_normal;
 		textureRegion_press = ManagerRegion.defense3_press;
+		sale = Sale.AIR;
 		break;
 	    }
+	}
+	public int getSale() {
+	    return sale;
 	}
 	public int getId() {
 	    return id;

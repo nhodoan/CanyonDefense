@@ -49,8 +49,24 @@ public class Position {
     public static float MENU_X = H * width / W;
     public static float MENU_Y = 0;
 
-    public static float PLAY_MENU_PLAY_X = 490 * width / W;
-    public static float PLAY_MENU_PLAY_Y = 420 * height / H;
+    public static float PLAY_MENU_PLAY_X = 5 * width / W;
+    public static float PLAY_MENU_PLAY_Y = 440 * height / H;
+    
+    public static float MENU_GOLD_FRAME_X = 535 * width / W;
+    public static float MENU_GOLD_FRAME_Y = 440 * height / H;
+    
+    public static float MENU_GOLD_TEXT_X_START =  565 * width / W;
+    public static float MENU_TEXT_Y =  446 * height / H;
+    
+    public static float MENU_WAVE_FRAME_X = 440 * width / W;
+    public static float MENU_WAVE_FRAME_Y = 440 * height / H;
+    public static float MENU_WAVE_TEXT_X_START =  465 * width / W;
+    
+    public static float MENU_HEART_FRAME_X = 10 *width / W;
+    public static float MENU_HEART_FRAME_Y = 10*height / H;
+    public static float MENU_TEXT_HEART_Y = 16*height / H;
+    public static float MENU_HEART_TEXT_X_START =  45 * width / W;
+    
     public static float PLAY_MENU_SOUND_X = 540 * width / W;
     public static float PLAY_MENU_SOUND_Y = 420 * height / H;
     public static float PLAY_MENU_QUIT_X = 590 * width / W;
@@ -65,11 +81,19 @@ public class Position {
 
     /* Position of Main Play in Play Screen */
 
-    public static float genX(int x) {
-	return Dimension.BRICK_W * x;
+    public static int genI(float x) {
+	return (int) (x / Dimension.BRICK_W);
     }
 
-    public static float genY(int y) {
-	return Dimension.BRICK_H * (MapData.rows -1 - y);
+    public static int genJ(float y) {
+	return MapData.rows - 1 - (int) (y / Dimension.BRICK_H);
+    }
+
+    public static float genXFromFloat(float x) {
+	return Dimension.BRICK_W * ((int) (x / Dimension.BRICK_W));
+    }
+
+    public static float genYFromFloat(float y) {
+	return Dimension.BRICK_H * ((int) (y / Dimension.BRICK_H));
     }
 }
