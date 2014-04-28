@@ -18,7 +18,6 @@ public class Bullet {
 
     public Bullet() {
 	speed = 10;
-	power = 50;
 	texture = ManagerRegion.bullet;
 	width = Dimension.BRICK_W / 2;
 	height = Dimension.BRICK_H / 2;

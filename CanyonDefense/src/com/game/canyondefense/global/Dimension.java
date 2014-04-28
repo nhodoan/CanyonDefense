@@ -15,9 +15,9 @@ public class Dimension {
      */
     public static float START_PLAY_W = width * 150 / W;
     public static float START_PLAY_H = height * 60 / H;
-    public static float START_HELP_W = width * 120 / W;
+    public static float START_HELP_W = width * 140 / W;
     public static float START_HELP_H = height * 50 / H;
-    public static float START_HIGH_SCORE_W = width * 120 / W;
+    public static float START_HIGH_SCORE_W = width * 140 / W;
     public static float START_HIGH_SCORE_H = height * 50 / H;
 
     /**
@@ -50,27 +50,28 @@ public class Dimension {
 
     public static float MENU_W = width * 160 / W;
     public static float MENU_H = height;
-    
+
     public static float BRICK_W = 40 * width / W;
     public static float BRICK_H = 40 * height / H;
 
-    
+    public static float FIRE_W = 40 * width / W;
+    public static float FIRE_H = 40 * height / H;
 
     public static float PLAY_MENU_PLAY_W = width * 30 / W;
     public static float PLAY_MENU_PLAY_H = height * 30 / H;
-    
+
     public static float MENU_GOLD_FRAME_W = width * 100 / W;
     public static float MENU_GOLD_FRAME_H = height * 40 / H;
-    
+
     public static float MENU_TEXT_W = width * 13 / W;
-    public static float MENU_TEXT_H = height * 28 / H;
-    
-    public static float MENU_WAVE_FRAME_W = width * 90 / W;
+    public static float MENU_TEXT_H = height * 26 / H;
+
+    public static float MENU_WAVE_FRAME_W = width * 107 / W;
     public static float MENU_WAVE_FRAME_H = height * 40 / H;
-    
+
     public static float MENU_HEART_FRAME_W = width * 90 / W;
     public static float MENU_HEART_FRAME_H = height * 40 / H;
-    
+
     public static float PLAY_MENU_SOUND_W = width * 40 / W;
     public static float PLAY_MENU_SOUND_H = height * 40 / H;
     public static float PLAY_MENU_QUIT_W = width * 40 / W;
@@ -84,16 +85,33 @@ public class Dimension {
     public static float PLAY_MENU_DEFENSE_3_H = height * 30 / H;
     public static float PLAY_MENU_DEFENSE_4_W = width * 30 / W;
     public static float PLAY_MENU_DEFENSE_4_H = height * 30 / H;
-    
-    public static float PLAY_MENU_CIRCLE_SELECT_W = width * 80/W;
-    public static float PLAY_MENU_CIRCLE_SELECT_H = width * 80/W;
+    public static float PLAY_MENU_SELL_DEFENSE_W = width * 30 / W;
+    public static float PLAY_MENU_SELL_DEFENSE_H = height * 30 / H;
+
+    public static float PLAY_MENU_CIRCLE_SELECT_W = width * 80 / W;
+    public static float PLAY_MENU_CIRCLE_SELECT_H = width * 80 / W;
 
     /* Position of Main Play in Play Screen */
 
     public static float ATTACK_W = width * 50 / W;
     public static float ATTACK_H = height * 50 / H;
-    
+
     public static float DEFENSE_W = width * 40 / W;
-    public static float DEFENSE_H = height *40 / H;
+    public static float DEFENSE_H = height * 40 / H;
+
+    public static float PLAY_ATTACK_W = width * 50 / W;
+    public static float PLAY_ATTACK_H = height * 50 / H;
+
+    public static float ICON_STATUS_GAME_W = 200 * width / W;
+    public static float ICON_STATUS_GAME_H = 80 * height / H;
+
+    public static float REPLAY_GAME_W = 100 * width / W;
+    public static float REPLAY_GAME_H = 50 * height / H;
+    
+    public static float CONT_GAME_W = 150 * width / W;
+    public static float CONT_GAME_H = 50 * height / H;
+
+    public static float BACK_MENU_W = 150 * width / W;
+    public static float BACK_MENU_H = 80 * height / H;
 
 }

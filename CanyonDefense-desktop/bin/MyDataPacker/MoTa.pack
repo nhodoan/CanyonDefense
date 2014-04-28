@@ -74,46 +74,46 @@ MoTa4.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-mapscreen/map_1_hover
-  rotate: false
-  xy: 1, 1
-  size: 80, 68
-  orig: 80, 68
-  offset: 0, 0
-  index: -1
 mapscreen/map_1_normal
   rotate: false
-  xy: 83, 1
-  size: 80, 68
-  orig: 80, 68
-  offset: 0, 0
-  index: -1
-mapscreen/map_2_hover
-  rotate: false
-  xy: 165, 1
-  size: 80, 68
-  orig: 80, 68
+  xy: 1, 1
+  size: 200, 120
+  orig: 200, 120
   offset: 0, 0
   index: -1
 mapscreen/map_2_normal
   rotate: false
-  xy: 247, 1
-  size: 80, 68
-  orig: 80, 68
-  offset: 0, 0
-  index: -1
-mapscreen/map_3_hover
-  rotate: false
-  xy: 329, 1
-  size: 80, 68
-  orig: 80, 68
+  xy: 1, 1
+  size: 200, 120
+  orig: 200, 120
   offset: 0, 0
   index: -1
 mapscreen/map_3_normal
   rotate: false
-  xy: 411, 1
-  size: 80, 68
-  orig: 80, 68
+  xy: 1, 1
+  size: 200, 120
+  orig: 200, 120
+  offset: 0, 0
+  index: -1
+mapscreen/map_1_press
+  rotate: false
+  xy: 203, 1
+  size: 200, 120
+  orig: 200, 120
+  offset: 0, 0
+  index: -1
+mapscreen/map_2_press
+  rotate: false
+  xy: 203, 1
+  size: 200, 120
+  orig: 200, 120
+  offset: 0, 0
+  index: -1
+mapscreen/map_3_press
+  rotate: false
+  xy: 203, 1
+  size: 200, 120
+  orig: 200, 120
   offset: 0, 0
   index: -1
 
@@ -187,9 +187,44 @@ MoTa7.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-playscreen/bullet/shot1
+playscreen/bullet/fire_power1_normal
+  rotate: false
+  xy: 1, 35
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+playscreen/bullet/fire_power1_press
+  rotate: false
+  xy: 67, 35
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+playscreen/bullet/fire_power2_normal
+  rotate: false
+  xy: 133, 35
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+playscreen/bullet/fire_power2_press
+  rotate: false
+  xy: 199, 35
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+playscreen/bullet/particle
   rotate: false
   xy: 1, 1
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+playscreen/bullet/shot1
+  rotate: false
+  xy: 265, 79
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
@@ -248,6 +283,20 @@ playscreen/defense/defense3_press
   orig: 90, 90
   offset: 0, 0
   index: -1
+playscreen/defense/sell_normal
+  rotate: false
+  xy: 223, 87
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+playscreen/defense/sell_press
+  rotate: false
+  xy: 273, 87
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
 
 MoTa9.png
 format: RGBA8888
@@ -255,28 +304,21 @@ filter: Nearest,Nearest
 repeat: none
 playscreen/menu/bg_menu
   rotate: false
-  xy: 1, 289
+  xy: 1, 303
   size: 467, 716
   orig: 467, 716
   offset: 0, 0
   index: -1
-playscreen/menu/number
-  rotate: false
-  xy: 1, 237
-  size: 616, 50
-  orig: 616, 50
-  offset: 0, 0
-  index: -1
 playscreen/menu/gold_frame
   rotate: false
-  xy: 1, 171
+  xy: 1, 237
   size: 225, 64
   orig: 225, 64
   offset: 0, 0
   index: -1
 playscreen/menu/wave_frame
   rotate: false
-  xy: 470, 941
+  xy: 1, 171
   size: 199, 64
   orig: 199, 64
   offset: 0, 0
@@ -288,85 +330,256 @@ playscreen/menu/pause_normal
   orig: 102, 102
   offset: 0, 0
   index: -1
-playscreen/menu/pause_press
-  rotate: false
-  xy: 470, 837
-  size: 102, 102
-  orig: 102, 102
-  offset: 0, 0
-  index: -1
 playscreen/menu/heart_frame
   rotate: false
-  xy: 228, 184
+  xy: 228, 250
   size: 146, 51
   orig: 146, 51
   offset: 0, 0
   index: -1
-playscreen/menu/weapon_info_3_normal
+playscreen/menu/pause_press
   rotate: false
-  xy: 470, 725
-  size: 60, 110
-  orig: 60, 110
+  xy: 105, 67
+  size: 102, 102
+  orig: 102, 102
   offset: 0, 0
   index: -1
-playscreen/menu/weapon_info_1_normal
-  rotate: false
-  xy: 470, 611
-  size: 56, 112
-  orig: 56, 112
-  offset: 0, 0
-  index: -1
-playscreen/menu/weapon_info_2_normal
-  rotate: false
-  xy: 470, 497
-  size: 56, 112
-  orig: 56, 112
-  offset: 0, 0
-  index: -1
-playscreen/menu/quit_normal
-  rotate: false
-  xy: 671, 941
-  size: 64, 64
-  orig: 64, 64
-  offset: 0, 0
-  index: -1
-playscreen/menu/quit_press
+playscreen/menu/attack_play_normal
   rotate: false
   xy: 1, 1
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
-playscreen/menu/sound_off_normal
+playscreen/menu/attack_play_press
   rotate: false
-  xy: 105, 105
+  xy: 67, 1
   size: 64, 64
   orig: 64, 64
+  offset: 0, 0
+  index: -1
+playscreen/menu/quit_normal
+  rotate: false
+  xy: 133, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+playscreen/menu/quit_press
+  rotate: false
+  xy: 376, 237
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+playscreen/menu/sound_off_normal
+  rotate: false
+  xy: 202, 171
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+playscreen/menu/weapon_info_3_normal
+  rotate: false
+  xy: 209, 59
+  size: 60, 110
+  orig: 60, 110
   offset: 0, 0
   index: -1
 playscreen/menu/sound_off_press
   rotate: false
-  xy: 574, 875
+  xy: 268, 184
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
+playscreen/menu/weapon_info_1_normal
+  rotate: false
+  xy: 271, 70
+  size: 56, 112
+  orig: 56, 112
+  offset: 0, 0
+  index: -1
+playscreen/menu/weapon_info_2_normal
+  rotate: false
+  xy: 329, 70
+  size: 56, 112
+  orig: 56, 112
+  offset: 0, 0
+  index: -1
 playscreen/menu/sound_on_normal
   rotate: false
-  xy: 737, 941
+  xy: 442, 237
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 playscreen/menu/sound_on_press
   rotate: false
-  xy: 640, 875
+  xy: 387, 171
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 
 MoTa10.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+playscreen/menu/number/0
+  rotate: false
+  xy: 1, 12
+  size: 59, 49
+  orig: 59, 49
+  offset: 0, 0
+  index: -1
+playscreen/menu/number/2
+  rotate: false
+  xy: 62, 12
+  size: 57, 49
+  orig: 57, 49
+  offset: 0, 0
+  index: -1
+playscreen/menu/number/3
+  rotate: false
+  xy: 121, 12
+  size: 57, 49
+  orig: 57, 49
+  offset: 0, 0
+  index: -1
+playscreen/menu/number/4
+  rotate: false
+  xy: 180, 14
+  size: 59, 47
+  orig: 59, 47
+  offset: 0, 0
+  index: -1
+playscreen/menu/number/7
+  rotate: false
+  xy: 241, 13
+  size: 58, 48
+  orig: 58, 48
+  offset: 0, 0
+  index: -1
+playscreen/menu/number/5
+  rotate: false
+  xy: 301, 13
+  size: 57, 48
+  orig: 57, 48
+  offset: 0, 0
+  index: -1
+playscreen/menu/number/8
+  rotate: false
+  xy: 360, 10
+  size: 56, 51
+  orig: 56, 51
+  offset: 0, 0
+  index: -1
+playscreen/menu/number/6
+  rotate: false
+  xy: 418, 12
+  size: 54, 49
+  orig: 54, 49
+  offset: 0, 0
+  index: -1
+playscreen/menu/number/9
+  rotate: false
+  xy: 474, 12
+  size: 53, 49
+  orig: 53, 49
+  offset: 0, 0
+  index: -1
+playscreen/menu/number/gach
+  rotate: false
+  xy: 529, 1
+  size: 37, 60
+  orig: 37, 60
+  offset: 0, 0
+  index: -1
+playscreen/menu/number/1
+  rotate: false
+  xy: 568, 14
+  size: 34, 47
+  orig: 34, 47
+  offset: 0, 0
+  index: -1
+
+MoTa11.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+playscreen/menu/statusgame/pause_icon
+  rotate: false
+  xy: 1, 65
+  size: 374, 60
+  orig: 374, 60
+  offset: 0, 0
+  index: -1
+playscreen/menu/statusgame/win_icon
+  rotate: false
+  xy: 1, 1
+  size: 285, 62
+  orig: 285, 62
+  offset: 0, 0
+  index: -1
+playscreen/menu/statusgame/lose_icon
+  rotate: false
+  xy: 377, 66
+  size: 281, 59
+  orig: 281, 59
+  offset: 0, 0
+  index: -1
+playscreen/menu/statusgame/back_menu_normal
+  rotate: false
+  xy: 660, 51
+  size: 250, 74
+  orig: 250, 74
+  offset: 0, 0
+  index: -1
+playscreen/menu/statusgame/back_menu_press
+  rotate: false
+  xy: 912, 51
+  size: 250, 74
+  orig: 250, 74
+  offset: 0, 0
+  index: -1
+playscreen/menu/statusgame/continue_game_normal
+  rotate: false
+  xy: 1164, 65
+  size: 227, 60
+  orig: 227, 60
+  offset: 0, 0
+  index: -1
+playscreen/menu/statusgame/continue_game_press
+  rotate: false
+  xy: 1393, 65
+  size: 227, 60
+  orig: 227, 60
+  offset: 0, 0
+  index: -1
+playscreen/menu/statusgame/replay_normal
+  rotate: false
+  xy: 1622, 49
+  size: 147, 76
+  orig: 147, 76
+  offset: 0, 0
+  index: -1
+playscreen/menu/statusgame/replay_press
+  rotate: false
+  xy: 1771, 49
+  size: 147, 76
+  orig: 147, 76
+  offset: 0, 0
+  index: -1
+playscreen/menu/statusgame/bg
+  rotate: false
+  xy: 1920, 65
+  size: 100, 60
+  orig: 100, 60
+  offset: 0, 0
+  index: -1
+
+MoTa12.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -420,7 +633,7 @@ playscreen/popup/defense3_select_press
   offset: 0, 0
   index: -1
 
-MoTa11.png
+MoTa13.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -431,45 +644,59 @@ startscreen/start_bg
   orig: 640, 480
   offset: 0, 0
   index: -1
-startscreen/high_score_normal
-  rotate: false
-  xy: 643, 447
-  size: 247, 34
-  orig: 247, 34
-  offset: 0, 0
-  index: -1
-startscreen/high_score_press
-  rotate: false
-  xy: 643, 411
-  size: 247, 34
-  orig: 247, 34
-  offset: 0, 0
-  index: -1
 startscreen/help_normal
   rotate: false
-  xy: 643, 375
-  size: 196, 34
-  orig: 196, 34
+  xy: 643, 407
+  size: 314, 74
+  orig: 314, 74
   offset: 0, 0
   index: -1
 startscreen/help_press
   rotate: false
-  xy: 643, 339
-  size: 196, 34
-  orig: 196, 34
+  xy: 643, 331
+  size: 314, 74
+  orig: 314, 74
   offset: 0, 0
   index: -1
-startscreen/new_game_normal
+startscreen/high_score_normal
   rotate: false
-  xy: 643, 303
-  size: 196, 34
-  orig: 196, 34
+  xy: 959, 407
+  size: 314, 74
+  orig: 314, 74
   offset: 0, 0
   index: -1
-startscreen/new_game_press
+startscreen/high_score_press
   rotate: false
-  xy: 643, 267
-  size: 196, 34
-  orig: 196, 34
+  xy: 643, 255
+  size: 314, 74
+  orig: 314, 74
+  offset: 0, 0
+  index: -1
+startscreen/play_game_normal
+  rotate: false
+  xy: 959, 331
+  size: 314, 74
+  orig: 314, 74
+  offset: 0, 0
+  index: -1
+startscreen/play_game_press
+  rotate: false
+  xy: 1275, 407
+  size: 314, 74
+  orig: 314, 74
+  offset: 0, 0
+  index: -1
+startscreen/setting_normal
+  rotate: false
+  xy: 643, 179
+  size: 314, 74
+  orig: 314, 74
+  offset: 0, 0
+  index: -1
+startscreen/setting_press
+  rotate: false
+  xy: 959, 255
+  size: 314, 74
+  orig: 314, 74
   offset: 0, 0
   index: -1

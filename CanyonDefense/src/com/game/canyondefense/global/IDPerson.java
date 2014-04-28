@@ -11,4 +11,7 @@ public class IDPerson {
     public static final int ATTACK_AIR_1 = 6;
     public static final int ATTACK_AIR_2 = 7;
     
+    public static final int FIRE_1 = 8;
+    public static final int FIRE_2 = 9; 
+    
 }

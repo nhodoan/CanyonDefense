@@ -1,7 +1,6 @@
 package com.game.canyondefense.screen;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -9,9 +8,11 @@ import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -31,6 +32,8 @@ import com.game.canyondefense.object.Bullet;
 import com.game.canyondefense.object.DefenseAirObject;
 import com.game.canyondefense.object.DefenseGroundObject;
 import com.game.canyondefense.object.DefenseObject;
+import com.game.canyondefense.object.Fire;
+import com.game.canyondefense.object.FireAttack;
 import com.game.canyondefense.utils.Collision;
 
 public class PlayScreen extends BaseScreen implements InputProcessor {
@@ -40,17 +43,12 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
     public static boolean isSound = true;
     public static int map;
     public static int level;
-    public static int number_wave_current, number_wave_max;
 
-    // private AttackGroundObject attack_ground_1, attack_ground_2;
-    // private AttackAirObject attack_air;
-    //
-    // private DefenseGroundObject gun_1, gun_2;
-    // private DefenseAirObject defense_3;
+    private AreaObject play_game, play_attack, popup_defense_ground_1,
+	    popup_defense_ground_2, popup_defense_air_1, popup_defense_air_2;
+    private Fire fire_power_1, fire_power_2;
 
-    private AreaObject play_game, play_attack, sell_object,
-	    popup_defense_ground_1, popup_defense_ground_2,
-	    popup_defense_air_1, popup_defense_air_2;
+    private AreaObject replay_game, back_menu, continue_game;
 
     private ArrayList<AttackObject> list_attack_object;
     private ArrayList<DefenseObject> list_defense_object;
@@ -61,20 +59,31 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 
     // private AttackGroundObject list_attack_object.get(i);
     private long timeStartWave;
-    private boolean startWave = true;
+    private boolean startWave = false;
 
     private Integer[] mapData;
     private int sumAttack = 0;
     private boolean showPopupSelectDefense = false;
+    private boolean select_defense = false;
     private boolean gameOver = false;
+    private boolean gameWin = false;
 
-    private static int gold = 250;
-    private static int heart = 20;
+    private int gold = 1000;
+    private int heart = 20;
 
-    private static int maxWave, currentWave;
-    
+    private int maxWave, currentWave;
+    private boolean isShowNewAttack = false;
+
+    private ArrayList<FireAttack> listfireAttack;
 
     // private DefenseGroundObject testDefense;
+    private ArrayList<ParticleEffect> listEffect;
+    private TextureRegion[] arrayTextureNumber = { ManagerRegion.number0,
+	    ManagerRegion.number1, ManagerRegion.number2,
+	    ManagerRegion.number3, ManagerRegion.number4,
+	    ManagerRegion.number5, ManagerRegion.number6,
+	    ManagerRegion.number7, ManagerRegion.number8,
+	    ManagerRegion.number9, ManagerRegion.gach_xien };
 
     @Override
     public void show() {
@@ -90,10 +99,11 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	// list_attack_object.add(new Att)
 	list_bullet = new ArrayList<Bullet>();
 	allData = new ArrayList<ArrayList<Integer>>();
+	listEffect = new ArrayList<ParticleEffect>();
 
 	loadData();
-	maxWave = allData.size();
-	currentWave = 1;
+	maxWave = allData.size() - 1;
+	currentWave = 0;
 	// list_attack_object.get(i) = new
 	// AttackGroundObject(IDPerson.ATTACK_GROUND_1);
 	/* Init object */
@@ -109,9 +119,16 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 		IDObject.PLAY_POPUP_DEFENSE_GROUND_2);
 	popup_defense_air_1 = new AreaObject(IDObject.PLAY_POPUP_DEFENSE_AIR_1);
 	popup_defense_air_2 = new AreaObject(IDObject.PLAY_POPUP_DEFENSE_AIR_2);
+	play_attack = new AreaObject(IDObject.PLAY_ATTACK);
+	fire_power_1 = new Fire(IDObject.PLAY_MENU_FIRE_1);
+	fire_power_2 = new Fire(IDObject.PLAY_MENU_FIRE_2);
 
-	// play_attack = new AreaObject(IDObject.PLAY_MENU_ATTACK);
-	sell_object = new AreaObject(IDObject.PLAY_MENU_SELL);
+	listfireAttack = new ArrayList<FireAttack>();
+
+	replay_game = new AreaObject(IDObject.REPLAY);
+	back_menu = new AreaObject(IDObject.BACK_MENU);
+	continue_game = new AreaObject(IDObject.CONT_GAME);
+
     }
 
     private void loadData() {
@@ -162,7 +179,6 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	renderGold(sb);
 	renderWave(sb);
 	renderHeart(sb);
-	
 
 	/**
 	 * Render main play game
@@ -177,16 +193,79 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	renderBullet(sb);
 
 	renderPopupSelectDefense(sb);
+	for (ParticleEffect particleEffect : listEffect) {
+	    if (!particleEffect.isComplete()) {
+		particleEffect.draw(sb, arg0);
+		Gdx.app.log(TAG, "Drawing effect");
+	    }
+
+	}
+
+	if (isShowNewAttack) {
+	    sb.draw(play_attack.getTexture(), play_attack.getX(),
+		    play_attack.getY(), play_attack.getWidth(),
+		    play_attack.getHeight());
+	}
 	if (!isPlay) {
 	    /* Render dialog show game is paused */
+	    Color c = sb.getColor();
+	    float oldAlpha = c.a;
+	    c.a = oldAlpha * 0.2f;
+	    sb.setColor(c);
+	    sb.draw(ManagerRegion.bg_status, 0, 0, width, height);
+	    c.a = oldAlpha;
+	    sb.setColor(c);
+	    sb.draw(ManagerRegion.pause_icon, Position.ICON_STATUS_GAME_X,
+		    Position.ICON_STATUS_GAME_Y, Dimension.ICON_STATUS_GAME_W,
+		    Dimension.ICON_STATUS_GAME_H);
+	    sb.draw(continue_game.getTexture(), continue_game.getX(),
+		    continue_game.getY(), continue_game.getWidth(),
+		    continue_game.getHeight());
+	    sb.draw(replay_game.getTexture(), replay_game.getX(),
+		    replay_game.getY(), replay_game.getWidth(),
+		    replay_game.getHeight());
+	    sb.draw(back_menu.getTexture(), back_menu.getX(), back_menu.getY(),
+		    back_menu.getWidth(), back_menu.getHeight());
 	}
-	if(gameOver){
-	    /*Draw dialog game over*/
+	if (gameOver) {
+	    /* Draw dialog game over */
+	    Color c = sb.getColor();
+	    float oldAlpha = c.a;
+	    c.a = oldAlpha * 0.2f;
+	    sb.setColor(c);
+	    sb.draw(ManagerRegion.bg_status, 0, 0, width, height);
+	    c.a = oldAlpha;
+	    sb.setColor(c);
+	    sb.draw(ManagerRegion.lose_icon, Position.ICON_STATUS_GAME_X,
+		    Position.ICON_STATUS_GAME_Y, Dimension.ICON_STATUS_GAME_W,
+		    Dimension.ICON_STATUS_GAME_H);
+	    sb.draw(replay_game.getTexture(), replay_game.getX(),
+		    replay_game.getY(), replay_game.getWidth(),
+		    replay_game.getHeight());
+	    sb.draw(back_menu.getTexture(), back_menu.getX(), back_menu.getY(),
+		    back_menu.getWidth(), back_menu.getHeight());
+	}
+	if (gameWin) {
+	    /* Draw dialog game win */
+	    Color c = sb.getColor();
+	    float oldAlpha = c.a;
+	    c.a = oldAlpha * 0.5f;
+	    sb.setColor(c);
+	    sb.draw(ManagerRegion.bg_status, 0, 0, width, height);
+	    c.a = oldAlpha;
+	    sb.setColor(c);
+	    sb.draw(ManagerRegion.win_icon, Position.ICON_STATUS_GAME_X,
+		    Position.ICON_STATUS_GAME_Y, Dimension.ICON_STATUS_GAME_W,
+		    Dimension.ICON_STATUS_GAME_H);
+	    sb.draw(replay_game.getTexture(), replay_game.getX(),
+		    replay_game.getY(), replay_game.getWidth(),
+		    replay_game.getHeight());
+	    sb.draw(back_menu.getTexture(), back_menu.getX(), back_menu.getY(),
+		    back_menu.getWidth(), back_menu.getHeight());
 	}
 
 	sb.end();
 
-	
 	stage.draw();
 	update(arg0);
     }
@@ -196,14 +275,23 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	    sb.draw(bullet.getTexture(), bullet.getX(), bullet.getY(),
 		    bullet.getWidth(), bullet.getHeight());
 	}
+	sb.draw(fire_power_1.getTexture(), fire_power_1.getX() - 10,
+		fire_power_1.getY(), fire_power_1.getWidth(),
+		fire_power_1.getHeight());
+	sb.draw(fire_power_2.getTexture(), fire_power_2.getX(),
+		fire_power_2.getY(), fire_power_2.getWidth(),
+		fire_power_2.getHeight());
     }
 
     public void renderDefense(SpriteBatch sb) {
+	select_defense = false;
 	for (DefenseObject defenseObject : list_defense_object) {
 	    sb.draw(defenseObject.getTexture(), defenseObject.getX(),
 		    defenseObject.getY(), defenseObject.getWidth(),
 		    defenseObject.getHeight());
+
 	    if (defenseObject.isPress()) {
+		select_defense = true;
 		Color c = sb.getColor();
 		float oldAlpha = c.a;
 		c.a = oldAlpha * 0.2f;
@@ -219,6 +307,9 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 		sb.setColor(c);
 	    }
 	}
+	if (!select_defense) {
+
+	}
     }
 
     public void renderAttack(SpriteBatch sb) {
@@ -227,14 +318,15 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 		    .get(i).getX(), list_attack_object.get(i).getY(),
 		    list_attack_object.get(i).getWidth(), list_attack_object
 			    .get(i).getHeight());
-	    sb.draw(ManagerRegion.frame_blood,
-		    list_attack_object.get(i).getX(), list_attack_object.get(i)
-			    .getY() + Dimension.ATTACK_H, Dimension.ATTACK_W,
+	    sb.draw(ManagerRegion.frame_blood, list_attack_object.get(i).getX()
+		    + Dimension.ATTACK_W / 5, list_attack_object.get(i).getY()
+		    + Dimension.ATTACK_H, Dimension.ATTACK_W * 3 / 5,
 		    Dimension.ATTACK_H / 10);
-	    sb.draw(ManagerRegion.blood, list_attack_object.get(i).getX(),
-		    list_attack_object.get(i).getY() + Dimension.ATTACK_H,
-		    Dimension.ATTACK_W * list_attack_object.get(i).getBlood()
-			    / list_attack_object.get(i).getMax_blood(),
+	    sb.draw(ManagerRegion.blood, list_attack_object.get(i).getX()
+		    + Dimension.ATTACK_W / 5, list_attack_object.get(i).getY()
+		    + Dimension.ATTACK_H, Dimension.ATTACK_W * 3
+		    * list_attack_object.get(i).getBlood()
+		    / list_attack_object.get(i).getMax_blood() / 5,
 		    Dimension.ATTACK_H / 10);
 	}
     }
@@ -273,10 +365,10 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	    int numberDraw = tempGold
 		    / ((int) Math.pow(10, countNumber - i - 1));
 	    /* Draw number here */
-	    sb.draw(new TextureRegion(ManagerRegion.all_number,
-		    numberDraw * 56, 0, 56, 50), xDraw, Position.MENU_TEXT_Y,
-		    Dimension.MENU_TEXT_W, Dimension.MENU_TEXT_H);
-	    xDraw += Dimension.MENU_TEXT_W * 9 / 10;
+	    sb.draw(arrayTextureNumber[numberDraw], xDraw,
+		    Position.MENU_TEXT_Y, Dimension.MENU_TEXT_W,
+		    Dimension.MENU_TEXT_H);
+	    xDraw += Dimension.MENU_TEXT_W;
 	    tempGold = tempGold - numberDraw
 		    * (int) Math.pow(10, countNumber - i - 1);
 	}
@@ -290,33 +382,29 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 
 	float xDraw = Position.MENU_WAVE_TEXT_X_START;
 	int firstCurrentWave = currentWave / 10;
-	sb.draw(new TextureRegion(ManagerRegion.all_number,
-		firstCurrentWave * 56, 0, 56, 50), xDraw, Position.MENU_TEXT_Y,
-		Dimension.MENU_TEXT_W, Dimension.MENU_TEXT_H);
+	sb.draw(arrayTextureNumber[firstCurrentWave], xDraw,
+		Position.MENU_TEXT_Y, Dimension.MENU_TEXT_W,
+		Dimension.MENU_TEXT_H);
 	xDraw += Dimension.MENU_TEXT_W;
 
 	int secondCurrentWave = currentWave % 10;
-	sb.draw(new TextureRegion(ManagerRegion.all_number,
-		secondCurrentWave * 56, 0, 56, 50), xDraw,
+	sb.draw(arrayTextureNumber[secondCurrentWave], xDraw,
 		Position.MENU_TEXT_Y, Dimension.MENU_TEXT_W,
 		Dimension.MENU_TEXT_H);
-	xDraw += Dimension.MENU_TEXT_W / 2;
+	xDraw += Dimension.MENU_TEXT_W;
 
-	sb.draw(new TextureRegion(ManagerRegion.all_number, 10 * 56, 0, 56, 50),
-		xDraw, Position.MENU_TEXT_Y, Dimension.MENU_TEXT_W,
-		Dimension.MENU_TEXT_H);
+	sb.draw(arrayTextureNumber[10], xDraw, Position.MENU_TEXT_Y,
+		Dimension.MENU_TEXT_W, Dimension.MENU_TEXT_H);
 	xDraw += Dimension.MENU_TEXT_W;
 
 	int firstMaxWave = maxWave / 10;
-	sb.draw(new TextureRegion(ManagerRegion.all_number, firstMaxWave * 56,
-		0, 56, 50), xDraw, Position.MENU_TEXT_Y, Dimension.MENU_TEXT_W,
-		Dimension.MENU_TEXT_H);
+	sb.draw(arrayTextureNumber[firstMaxWave], xDraw, Position.MENU_TEXT_Y,
+		Dimension.MENU_TEXT_W, Dimension.MENU_TEXT_H);
 	xDraw += Dimension.MENU_TEXT_W;
 
 	int secondMaxWave = maxWave % 10;
-	sb.draw(new TextureRegion(ManagerRegion.all_number, secondMaxWave * 56,
-		0, 56, 50), xDraw, Position.MENU_TEXT_Y, Dimension.MENU_TEXT_W,
-		Dimension.MENU_TEXT_H);
+	sb.draw(arrayTextureNumber[secondMaxWave], xDraw, Position.MENU_TEXT_Y,
+		Dimension.MENU_TEXT_W, Dimension.MENU_TEXT_H);
 
     }
 
@@ -325,17 +413,18 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 		Position.MENU_HEART_FRAME_Y, Dimension.MENU_HEART_FRAME_W,
 		Dimension.MENU_HEART_FRAME_H);
 
-	float xDraw = Position.MENU_HEART_TEXT_X_START;
-	int firstHeart = heart / 10;
-	sb.draw(new TextureRegion(ManagerRegion.all_number, firstHeart * 56, 0,
-		56, 50), xDraw, Position.MENU_TEXT_HEART_Y,
-		Dimension.MENU_TEXT_W, Dimension.MENU_TEXT_H);
-	xDraw += Dimension.MENU_TEXT_W;
-
-	int secondHeart = heart % 10;
-	sb.draw(new TextureRegion(ManagerRegion.all_number, secondHeart * 56,
-		0, 56, 50), xDraw, Position.MENU_TEXT_HEART_Y,
-		Dimension.MENU_TEXT_W, Dimension.MENU_TEXT_H);
+	if (heart >= 0) {
+	    float xDraw = Position.MENU_HEART_TEXT_X_START;
+	    int firstHeart = heart / 10;
+	    sb.draw(arrayTextureNumber[firstHeart], xDraw,
+		    Position.MENU_TEXT_HEART_Y, Dimension.MENU_TEXT_W,
+		    Dimension.MENU_TEXT_H);
+	    xDraw += Dimension.MENU_TEXT_W;
+	    int secondHeart = heart % 10;
+	    sb.draw(arrayTextureNumber[secondHeart], xDraw,
+		    Position.MENU_TEXT_HEART_Y, Dimension.MENU_TEXT_W,
+		    Dimension.MENU_TEXT_H);
+	}
     }
 
     public void renderPopupSelectDefense(SpriteBatch sb) {
@@ -369,48 +458,59 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 
     private void update(float time) {
 
-	if (isPlay && !gameOver) {
+	if (isPlay && !gameOver && !gameWin) {
 
 	    // Control move of attack
 
 	    if (System.currentTimeMillis() - timeStartWave > sumAttack * 1000
-		    && (currentWave < maxWave)) {
-		if (sumList(allData.get(currentWave - 1)) > 0) {
-		    if (allData.get(currentWave - 1).get(0) > 0) {
+		    && (currentWave <= maxWave)) {
+		if (sumList(allData.get(currentWave)) > 0) {
+		    if (allData.get(currentWave).get(0) > 0) {
+
+			Gdx.app.log("Added attack",
+				String.valueOf(System.currentTimeMillis()));
 			list_attack_object.add(new AttackGroundObject(
 				IDPerson.ATTACK_GROUND_1));
-			allData.get(currentWave - 1).set(0,
-				allData.get(currentWave - 1).get(0) - 1);
-		    } else if (allData.get(currentWave - 1).get(1) > 0) {
+			allData.get(currentWave).set(0,
+				allData.get(currentWave).get(0) - 1);
+		    } else if (allData.get(currentWave).get(1) > 0) {
 			list_attack_object.add(new AttackGroundObject(
 				IDPerson.ATTACK_GROUND_2));
-			allData.get(currentWave - 1).set(1,
-				allData.get(currentWave - 1).get(1) - 1);
-		    } else if (allData.get(currentWave - 1).get(2) > 0) {
+			allData.get(currentWave).set(1,
+				allData.get(currentWave).get(1) - 1);
+		    } else if (allData.get(currentWave).get(2) > 0) {
 			list_attack_object.add(new AttackAirObject(
 				IDPerson.ATTACK_AIR_1));
-			allData.get(currentWave - 1).set(2,
-				allData.get(currentWave - 1).get(2) - 1);
+			allData.get(currentWave).set(2,
+				allData.get(currentWave).get(2) - 1);
 		    } else {
 			list_attack_object.add(new AttackAirObject(
 				IDPerson.ATTACK_AIR_2));
-			allData.get(currentWave - 1).set(3,
-				allData.get(currentWave - 1).get(3) - 1);
+			allData.get(currentWave).set(3,
+				allData.get(currentWave).get(3) - 1);
 		    }
+		    sumAttack++;
 
 		} else {
 
-		    currentWave++;
-		    if (currentWave < maxWave) {
-			startWave = true;
+		    if (list_attack_object.size() == 0) {
+			if (currentWave == maxWave) {
+			    gameWin = true;
+			    GameControl.androidInterface.soundWin();
+			    Gdx.app.log(TAG, "Game Win");
+			} else {
+			    isShowNewAttack = true;
+			}
 		    }
+		    // currentWave++;
+		    // if (currentWave < maxWave) {
+		    // startWave = true;
+		    // }
 		}
-		sumAttack++;
 
 	    }
 
 	    if (startWave) {
-		timeStartWave = System.currentTimeMillis();
 		sumAttack = 0;
 		startWave = false;
 	    }
@@ -419,14 +519,17 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 		AttackObject attackObject = it.next();
 		int currentI = (int) (attackObject.getX() * 2 / Dimension.BRICK_W);
 		int currentJ = (int) (attackObject.getY() * 2 / Dimension.BRICK_H);
-		if (currentI == MapData.columns*2 - 2) {
+		if (currentI == MapData.columns * 2 - 2) {
 		    it.remove();
 		    heart--;
+		    GameControl.androidInterface.soundHeartDie();
+		    Gdx.app.log(TAG, "End route");
 		    if (heart < 0) {
 			gameOver = true;
+			GameControl.androidInterface.soundLose();
+			Gdx.app.log(TAG, "Game Over");
 		    }
 
-		    Gdx.app.log(TAG, "End route");
 		    continue;
 		}
 		if (attackObject.getId() != IDPerson.ATTACK_AIR_1
@@ -565,8 +668,8 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 				defenseObject.setTimeOldFire(System
 					.currentTimeMillis());
 				bullet.setType(defenseObject.getType());
+				bullet.setPower(defenseObject.getPower());
 				list_bullet.add(bullet);
-				Gdx.app.log("Bullet", "Added");
 				break;
 
 			    }
@@ -576,6 +679,19 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 		}
 	    }
 
+	    for (Iterator<FireAttack> it = listfireAttack.iterator(); it
+		    .hasNext();) {
+		FireAttack fireAttack = it.next();
+		for (AttackObject attackObject : list_attack_object) {
+		    if (fireAttack.isAttacked(attackObject)) {
+			attackObject.attack(fireAttack.getPower());
+
+			Gdx.app.log(TAG, "Attacking fire");
+		    }
+		}
+
+		it.remove();
+	    }
 	    /* Check collision */
 	    for (AttackObject attackObject : list_attack_object) {
 
@@ -584,6 +700,7 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 		    if (Collision.isCollision(attackObject, bullet)
 			    && !attackObject.isDead()
 			    && bullet.getType() == attackObject.getType()) {
+			GameControl.androidInterface.soundDefense();
 			attackObject.attack(bullet.getPower());
 			it.remove();
 
@@ -636,13 +753,24 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	// TODO Auto-generated method stub
 	float x = screenX;
 	float y = height - screenY;
-	if (play_game.isInBound(x, y)) {
-	    play_game.setCanPress(false);
-	    return true;
-	}
-	if (!isPlay) {
 
+	if (gameWin || gameOver || !isPlay) {
+	    if (replay_game.isInBound(x, y)) {
+		replay_game.setCanPress(false);
+		return true;
+	    } else if (back_menu.isInBound(x, y)) {
+
+		back_menu.setCanPress(false);
+		return true;
+	    } else if (continue_game.isInBound(x, y) && !isPlay) {
+		continue_game.setCanPress(false);
+		return true;
+	    }
 	} else {
+	    if (play_game.isInBound(x, y)) {
+		play_game.setCanPress(false);
+		return true;
+	    }
 
 	    for (DefenseObject defenseObject : list_defense_object) {
 
@@ -650,13 +778,33 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 
 	    }
 
-	    for (DefenseObject defenseObject : list_defense_object) {
+	    for (int i = 0; i < list_defense_object.size(); i++) {
+		DefenseObject defenseObject = list_defense_object.get(i);
 		if (defenseObject.isInBound(x, y)) {
 		    defenseObject.setPress(true);
 		    return true;
 		}
 	    }
 
+	    if (fire_power_1.isSelect()) {
+		if (fire_power_1.isInBound(x, y)) {
+		    fire_power_1.setSelect(false);
+		}
+		return true;
+	    } else if (fire_power_2.isSelect()) {
+		if (fire_power_2.isInBound(x, y)) {
+		    fire_power_2.setSelect(false);
+		}
+		return true;
+	    } else {
+
+	    }
+
+	    if (isShowNewAttack) {
+		if (play_attack.isInBound(x, y)) {
+		    play_attack.setCanPress(false);
+		}
+	    }
 	    if (showPopupSelectDefense) {
 		if (popup_defense_ground_1.isInBound(x, y)) {
 		    popup_defense_ground_1.setCanPress(false);
@@ -672,10 +820,17 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 		    return true;
 		}
 	    }
+	    // fire_power_1.setSelect(false);
+	    // fire_power_2.setSelect(false);
+	    if (fire_power_1.isInBound(x, y)) {
+		fire_power_1.setCanPress(false);
+	    } else if (fire_power_2.isInBound(x, y)) {
+		fire_power_2.setCanPress(false);
+	    }
 
 	}
 
-	return super.touchDown(screenX, screenY, pointer, button);
+	return true;
     }
 
     @Override
@@ -683,133 +838,233 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	// TODO Auto-generated method stub
 	float x = screenX;
 	float y = height - screenY;
-	if (!play_game.canPress()) {
-	    play_game.setCanPress(true);
-	    if (play_game.isInBound(x, y)) {
-		isPlay = !isPlay;
+
+	if (gameWin || gameOver || !isPlay) {
+
+	    if (!replay_game.canPress() && replay_game.isInBound(x, y)) {
+		GameControl.getManagerScreen().creatScreen(
+			ManagerScreen.SCREEN_PLAY);
+	    } else if (!back_menu.canPress() && back_menu.isInBound(x, y)) {
+		GameControl.getManagerScreen().creatScreen(
+			ManagerScreen.SCREEN_START);
+	    } else if (!continue_game.canPress()
+		    && continue_game.isInBound(x, y)) {
+		isPlay = true;
+	    }
+	    continue_game.setCanPress(true);
+	    replay_game.setCanPress(true);
+	    back_menu.setCanPress(true);
+	    return true;
+
+	} else {
+	    if (!play_game.canPress()) {
+		play_game.setCanPress(true);
+		if (play_game.isInBound(x, y)) {
+		    isPlay = !isPlay;
+		    return true;
+		}
+	    }
+	    if (fire_power_1.isSelect()) {
+		fire_power_1.setSelect(false);
+		if (gold >= Sale.FIRE_1) {
+		    FireAttack fireAttack = new FireAttack(IDPerson.FIRE_1);
+		    fireAttack.setX(x);
+		    fireAttack.setY(y);
+		    listfireAttack.add(fireAttack);
+		    ParticleEffect p = new ParticleEffect();
+		    p.load(Gdx.files
+			    .internal("MyData\\playscreen\\bullet\\effect.p"),
+			    Gdx.files.internal("MyData\\playscreen\\bullet"));
+		    p.setPosition(x, y);
+		    p.start();
+
+		    listEffect.add(p);
+		    // p.findEmitter("smoke").setContinuous(true);
+		    gold -= Sale.FIRE_1;
+		    GameControl.androidInterface.soundFire();
+		    Gdx.app.log(TAG, "Fire !!!! ");
+		} else {
+		    Gdx.app.log(TAG, "Not enough money");
+		}
+
+		return true;
+	    } else if (fire_power_2.isSelect()) {
+		fire_power_2.setSelect(false);
+		if (gold >= Sale.FIRE_2) {
+		    FireAttack fireAttack = new FireAttack(IDPerson.FIRE_2);
+		    fireAttack.setX(x);
+		    fireAttack.setY(y);
+		    listfireAttack.add(fireAttack);
+		    ParticleEffect p = new ParticleEffect();
+		    p.load(Gdx.files
+			    .internal("MyData\\playscreen\\bullet\\effect2.p"),
+			    Gdx.files.internal("MyData\\playscreen\\bullet"));
+		    p.setPosition(x, y);
+		    p.start();
+
+		    listEffect.add(p);
+		    gold -= Sale.FIRE_2;
+		    GameControl.androidInterface.soundFire();
+		    Gdx.app.log(
+			    TAG,
+			    "Fire !!!! : Number = "
+				    + String.valueOf(listfireAttack.size()));
+		} else {
+		    Gdx.app.log(TAG, "Not enough money");
+		}
 		return true;
 	    }
-	}
-	if (showPopupSelectDefense) {
-	    if (!popup_defense_ground_1.canPress()) {
-		popup_defense_ground_1.setCanPress(true);
-		if (popup_defense_ground_1.isInBound(x, y)) {
-		    Gdx.app.log("Add defense", "Added");
-		    showPopupSelectDefense = false;
-		    if (gold >= Sale.GROUND_1) {
-			DefenseObject addDefense = new DefenseGroundObject(
-				IDPerson.DEFENSE_GROUND_1);
-			addDefense.setX(Position
-				.genXFromFloat(popup_defense_ground_1.getX()
-					+ Dimension.BRICK_W));
-			addDefense.setY(Position
-				.genYFromFloat(popup_defense_ground_1.getY()
-					- Dimension.BRICK_H / 2));
-			list_defense_object.add(addDefense);
-			gold -= Sale.GROUND_1;
-			mapData[Position.genJ(addDefense.getY()
-				+ Dimension.BRICK_H / 2)
-				* MapData.columns
-				+ Position.genI(addDefense.getX()
-					+ Dimension.BRICK_W / 2)] = 5;
-		    }
-		}
-	    } else if (!popup_defense_ground_2.canPress()) {
-		popup_defense_ground_2.setCanPress(true);
-		if (popup_defense_ground_2.isInBound(x, y)) {
-		    showPopupSelectDefense = false;
-		    if (gold >= Sale.GROUND_2) {
-			DefenseObject addDefense = new DefenseGroundObject(
-				IDPerson.DEFENSE_GROUND_2);
-			addDefense.setX(Position
-				.genXFromFloat(popup_defense_ground_1.getX()
-					+ Dimension.BRICK_W));
-			addDefense.setY(Position
-				.genYFromFloat(popup_defense_ground_1.getY()
-					- Dimension.BRICK_H / 2));
-			list_defense_object.add(addDefense);
-			gold -= Sale.GROUND_2;
-			mapData[Position.genJ(addDefense.getY()
-				+ Dimension.BRICK_H / 2)
-				* MapData.columns
-				+ Position.genI(addDefense.getX()
-					+ Dimension.BRICK_W / 2)] = 5;
-		    }
-		}
-	    } else if (!popup_defense_air_1.canPress()) {
-		popup_defense_air_1.setCanPress(true);
-		if (popup_defense_air_1.isInBound(x, y)) {
-		    showPopupSelectDefense = false;
-		    if (gold >= Sale.AIR_1) {
-			DefenseObject addDefense = new DefenseAirObject(
-				IDPerson.DEFENSE_AIR_1);
-			addDefense.setX(Position
-				.genXFromFloat(popup_defense_ground_1.getX()
-					+ Dimension.BRICK_W));
-			addDefense.setY(Position
-				.genYFromFloat(popup_defense_ground_1.getY()
-					- Dimension.BRICK_H / 2));
-			list_defense_object.add(addDefense);
-			gold -= Sale.AIR_1;
-			mapData[Position.genJ(addDefense.getY()
-				+ Dimension.BRICK_H / 2)
-				* MapData.columns
-				+ Position.genI(addDefense.getX()
-					+ Dimension.BRICK_W / 2)] = 5;
-		    }
-		}
-	    } else if (!popup_defense_air_2.canPress()) {
-		popup_defense_air_2.setCanPress(true);
-		if (popup_defense_air_2.isInBound(x, y)) {
-		    showPopupSelectDefense = false;
-		    if (gold >= Sale.AIR_2) {
-			DefenseObject addDefense = new DefenseAirObject(
-				IDPerson.DEFENSE_AIR_2);
-			addDefense.setX(Position
-				.genXFromFloat(popup_defense_ground_1.getX()
-					+ Dimension.BRICK_W));
-			addDefense.setY(Position
-				.genYFromFloat(popup_defense_ground_1.getY()
-					- Dimension.BRICK_H / 2));
-			list_defense_object.add(addDefense);
-			gold -= Sale.AIR_2;
-			mapData[Position.genJ(addDefense.getY()
-				+ Dimension.BRICK_H / 2)
-				* MapData.columns
-				+ Position.genI(addDefense.getX()
-					+ Dimension.BRICK_W / 2)] = 5;
-		    }
+	    if (isShowNewAttack && !play_attack.canPress()
+		    && play_attack.isInBound(x, y)) {
+		currentWave++;
+		play_attack.setCanPress(true);
+		if (currentWave <= maxWave) {
+		    startWave = true;
+		    isShowNewAttack = false;
+		    GameControl.androidInterface.soundStartWave();
+		    timeStartWave = System.currentTimeMillis();
 		}
 	    }
-	    showPopupSelectDefense = false;
-	} else {
-	    /* Check to show popup select new defense */
-	    int i = (int) (screenX / Dimension.BRICK_W);
-	    int j = (int) (screenY / Dimension.BRICK_H);
-	    showPopupSelectDefense = false;
-	    if (mapData[MapData.columns * j + i] == 1) {
-		showPopupSelectDefense = true;
-		popup_defense_ground_1.setX(x - Dimension.BRICK_W);
-		popup_defense_ground_1.setY(y + Dimension.BRICK_H / 2);
-
-		popup_defense_ground_2.setX(popup_defense_ground_1.getWidth()
-			+ popup_defense_ground_2.getWidth()
-			+ +popup_defense_ground_1.getX());
-		popup_defense_ground_2.setY(y + Dimension.BRICK_H / 2);
-
-		popup_defense_air_1.setX(x - Dimension.BRICK_W);
-		popup_defense_air_1.setY(y - Dimension.BRICK_H * 3 / 2);
-
-		popup_defense_air_2.setX(popup_defense_ground_1.getWidth()
-			+ popup_defense_ground_2.getWidth()
-			+ +popup_defense_ground_1.getX());
-		popup_defense_air_2.setY(y - Dimension.BRICK_H * 3 / 2);
+	    if (showPopupSelectDefense) {
+		if (!popup_defense_ground_1.canPress()) {
+		    popup_defense_ground_1.setCanPress(true);
+		    if (popup_defense_ground_1.isInBound(x, y)) {
+			Gdx.app.log("Add defense", "Added");
+			showPopupSelectDefense = false;
+			if (gold >= Sale.GROUND_1) {
+			    DefenseObject addDefense = new DefenseGroundObject(
+				    IDPerson.DEFENSE_GROUND_1);
+			    addDefense.setX(Position
+				    .genXFromFloat(popup_defense_ground_1
+					    .getX() + Dimension.BRICK_W));
+			    addDefense.setY(Position
+				    .genYFromFloat(popup_defense_ground_1
+					    .getY() - Dimension.BRICK_H / 2));
+			    list_defense_object.add(addDefense);
+			    gold -= Sale.GROUND_1;
+			    mapData[Position.genJ(addDefense.getY()
+				    + Dimension.BRICK_H / 2)
+				    * MapData.columns
+				    + Position.genI(addDefense.getX()
+					    + Dimension.BRICK_W / 2)] = 5;
+			}
+		    }
+		} else if (!popup_defense_ground_2.canPress()) {
+		    popup_defense_ground_2.setCanPress(true);
+		    if (popup_defense_ground_2.isInBound(x, y)) {
+			showPopupSelectDefense = false;
+			if (gold >= Sale.GROUND_2) {
+			    DefenseObject addDefense = new DefenseGroundObject(
+				    IDPerson.DEFENSE_GROUND_2);
+			    addDefense.setX(Position
+				    .genXFromFloat(popup_defense_ground_1
+					    .getX() + Dimension.BRICK_W));
+			    addDefense.setY(Position
+				    .genYFromFloat(popup_defense_ground_1
+					    .getY() - Dimension.BRICK_H / 2));
+			    list_defense_object.add(addDefense);
+			    gold -= Sale.GROUND_2;
+			    mapData[Position.genJ(addDefense.getY()
+				    + Dimension.BRICK_H / 2)
+				    * MapData.columns
+				    + Position.genI(addDefense.getX()
+					    + Dimension.BRICK_W / 2)] = 5;
+			}
+		    }
+		} else if (!popup_defense_air_1.canPress()) {
+		    popup_defense_air_1.setCanPress(true);
+		    if (popup_defense_air_1.isInBound(x, y)) {
+			showPopupSelectDefense = false;
+			if (gold >= Sale.AIR_1) {
+			    DefenseObject addDefense = new DefenseAirObject(
+				    IDPerson.DEFENSE_AIR_1);
+			    addDefense.setX(Position
+				    .genXFromFloat(popup_defense_ground_1
+					    .getX() + Dimension.BRICK_W));
+			    addDefense.setY(Position
+				    .genYFromFloat(popup_defense_ground_1
+					    .getY() - Dimension.BRICK_H / 2));
+			    list_defense_object.add(addDefense);
+			    gold -= Sale.AIR_1;
+			    mapData[Position.genJ(addDefense.getY()
+				    + Dimension.BRICK_H / 2)
+				    * MapData.columns
+				    + Position.genI(addDefense.getX()
+					    + Dimension.BRICK_W / 2)] = 5;
+			}
+		    }
+		} else if (!popup_defense_air_2.canPress()) {
+		    popup_defense_air_2.setCanPress(true);
+		    if (popup_defense_air_2.isInBound(x, y)) {
+			showPopupSelectDefense = false;
+			if (gold >= Sale.AIR_2) {
+			    DefenseObject addDefense = new DefenseAirObject(
+				    IDPerson.DEFENSE_AIR_2);
+			    addDefense.setX(Position
+				    .genXFromFloat(popup_defense_ground_1
+					    .getX() + Dimension.BRICK_W));
+			    addDefense.setY(Position
+				    .genYFromFloat(popup_defense_ground_1
+					    .getY() - Dimension.BRICK_H / 2));
+			    list_defense_object.add(addDefense);
+			    gold -= Sale.AIR_2;
+			    mapData[Position.genJ(addDefense.getY()
+				    + Dimension.BRICK_H / 2)
+				    * MapData.columns
+				    + Position.genI(addDefense.getX()
+					    + Dimension.BRICK_W / 2)] = 5;
+			}
+		    }
+		}
+		showPopupSelectDefense = false;
+	    } else if (fire_power_1.isInBound(x, y) && !fire_power_1.canPress()) {
+		fire_power_1.setCanPress(true);
+		fire_power_1.setSelect(true);
+	    } else if (fire_power_2.isInBound(x, y) && !fire_power_2.canPress()) {
+		fire_power_2.setCanPress(true);
+		fire_power_2.setSelect(true);
 	    } else {
+		/* Check to show popup select new defense */
+		int i = (int) (screenX / Dimension.BRICK_W);
+		int j = (int) (screenY / Dimension.BRICK_H);
+		showPopupSelectDefense = false;
+		if (mapData[MapData.columns * j + i] == 1) {
+		    showPopupSelectDefense = true;
+		    GameControl.androidInterface.soundShowPopup();
+		    popup_defense_ground_1.setX(x - Dimension.BRICK_W);
+		    popup_defense_ground_1.setY(y + Dimension.BRICK_H / 2);
 
+		    popup_defense_ground_2.setX(popup_defense_ground_1
+			    .getWidth()
+			    + popup_defense_ground_2.getWidth()
+			    + +popup_defense_ground_1.getX());
+		    popup_defense_ground_2.setY(y + Dimension.BRICK_H / 2);
+
+		    popup_defense_air_1.setX(x - Dimension.BRICK_W);
+		    popup_defense_air_1.setY(y - Dimension.BRICK_H * 3 / 2);
+
+		    popup_defense_air_2.setX(popup_defense_ground_1.getWidth()
+			    + popup_defense_ground_2.getWidth()
+			    + +popup_defense_ground_1.getX());
+		    popup_defense_air_2.setY(y - Dimension.BRICK_H * 3 / 2);
+		} else {
+
+		}
 	    }
 	}
 	/* Check touch Up on all defenses */
 
-	return super.touchUp(screenX, screenY, pointer, button);
+	return true;
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+	// TODO Auto-generated method stub
+	if (keycode == Keys.BACK) {
+	    if (isPlay) {
+		isPlay = false;
+	    }
+	}
+	return super.keyDown(keycode);
     }
 }

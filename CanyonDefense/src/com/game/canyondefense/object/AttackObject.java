@@ -1,6 +1,5 @@
 package com.game.canyondefense.object;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.game.canyondefense.global.Dimension;
 import com.game.canyondefense.global.IDPerson;
@@ -48,25 +47,25 @@ public class AttackObject {
 	    blood = 80;
 	    speed = 40;
 	    allTextureRegion = ManagerRegion.all_attack_ground_1;
-	    gold = 100;
+	    gold = 30;
 	    break;
 	case IDPerson.ATTACK_GROUND_2:
-	    blood = 90;
-	    speed = 50;
+	    blood = 100;
+	    speed = 45;
 	    allTextureRegion = ManagerRegion.all_attack_ground_2;
-	    gold = 120;
+	    gold = 50;
 	    break;
 	case IDPerson.ATTACK_AIR_1:
 	    allTextureRegion = ManagerRegion.all_attack_air;
 	    speed = 40;
-	    blood = 70;
-	    gold = 150;
+	    blood = 100;
+	    gold = 50;
 	    break;
 	case IDPerson.ATTACK_AIR_2:
 	    allTextureRegion = ManagerRegion.all_attack_air;
-	    speed = 40;
-	    blood = 70;
-	    gold = 150;
+	    speed = 50;
+	    blood = 150;
+	    gold = 70;
 	    break;
 	}
 	

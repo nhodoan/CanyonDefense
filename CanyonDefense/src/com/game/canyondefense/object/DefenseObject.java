@@ -22,7 +22,7 @@ public class DefenseObject {
 	    this.id = id;
 	    width = Dimension.DEFENSE_W;
 	    height = Dimension.DEFENSE_H;
-	    power = 5;
+	    
 	    isPress = false;
 	    timeOldFire = 0;
 	    radius_attack = Dimension.DEFENSE_H * 3;
@@ -30,22 +30,26 @@ public class DefenseObject {
 	    case IDPerson.DEFENSE_GROUND_1:
 		textureRegion_normal = ManagerRegion.defense1_normal;
 		textureRegion_press = ManagerRegion.defense1_press;
+		power = 20;
 		sale = Sale.GROUND_1;
 		break;
 	    case IDPerson.DEFENSE_GROUND_2:
 		textureRegion_normal = ManagerRegion.defense2_normal;
 		textureRegion_press = ManagerRegion.defense2_press;
 		sale = Sale.GROUND_2;
+		power = 30;
 		break;
 	    case IDPerson.DEFENSE_AIR_1:
 		textureRegion_normal = ManagerRegion.defense3_normal;
 		textureRegion_press = ManagerRegion.defense3_press;
 		sale = Sale.AIR_1;
+		power = 25;
 		break;
 	    case IDPerson.DEFENSE_AIR_2:
 		textureRegion_normal = ManagerRegion.defense3_normal;
 		textureRegion_press = ManagerRegion.defense3_press;
 		sale = Sale.AIR_2;
+		power = 40;
 		break;
 	    }
 	}

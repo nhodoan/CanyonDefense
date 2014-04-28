@@ -99,7 +99,7 @@ public class LoadingScreen implements Screen {
 					e.printStackTrace();
 				}finally{
 					GameControl.getManagerScreen().creatScreen(
-							ManagerScreen.SCREEN_PLAY);
+							ManagerScreen.SCREEN_START);
 				}
 				
 //			}

@@ -37,4 +37,14 @@ public class IDObject {
 	
 	public static final int PLAY_MENU_SELL = 23;
 	
+	public static final int PLAY_MENU_FIRE_1 = 24;
+	public static final int PLAY_MENU_FIRE_2 = 25;
+	
+	
+	public static final int PLAY_ATTACK = 26;
+	
+	public static final int REPLAY = 27;
+	public static final int BACK_MENU = 28;
+	public static final int CONT_GAME = 29;
+	
 }
