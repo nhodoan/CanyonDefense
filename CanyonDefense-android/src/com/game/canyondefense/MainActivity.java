@@ -14,15 +14,15 @@ public class MainActivity extends AndroidApplication implements
     private SoundPool soundPool;
     private int click, fire, win, lose, heart_die, start_wave, attack,
 	    show_popup;
-
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 
 	AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
+	
 	cfg.useGL20 = false;
 	soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
-
 	click = soundPool.load(this, R.raw.click, 1);
 	fire = soundPool.load(this, R.raw.fire, 1);
 	win = soundPool.load(this, R.raw.winwinwin, 1);

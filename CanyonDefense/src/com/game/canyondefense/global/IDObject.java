@@ -47,4 +47,8 @@ public class IDObject {
 	public static final int BACK_MENU = 28;
 	public static final int CONT_GAME = 29;
 	
+	public static final int GUI_NEXT = 30;
+	
+	public static final int GUI_PREV = 31;
+	
 }

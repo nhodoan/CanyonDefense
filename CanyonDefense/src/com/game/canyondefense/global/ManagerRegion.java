@@ -16,7 +16,10 @@ public class ManagerRegion {
 	    diff_medium_normal, diff_medium_press, diff_hard_normal,
 	    diff_hard_press;
 
-    public static TextureRegion map_bg, diff_bg,high_score_bg,high_score_table;
+    public static TextureRegion map_bg, diff_bg, high_score_bg,
+	    high_score_table;
+
+    public static TextureRegion gui_1, gui_2, gui_3,next,next_press,prev,prev_press;
 
     public static TextureRegion back_menu_normal, back_menu_press,
 	    replay_normal, replay_press, win_icon, lose_icon, bg_status,
@@ -90,7 +93,7 @@ public class ManagerRegion {
 	menu_bg = atlas.findRegion("playscreen/menu/bg_menu");
 	high_score_table = atlas.findRegion("highscorescreen/table");
 	high_score_bg = atlas.findRegion("highscorescreen/table");
-	
+
 	play_menu_pause_normal = atlas
 		.findRegion("playscreen/menu/pause_normal");
 	play_menu_pause_press = atlas.findRegion("playscreen/menu/pause_press");
@@ -123,6 +126,16 @@ public class ManagerRegion {
 	wave_frame = atlas.findRegion("playscreen/menu/wave_frame");
 
 	heart_frame = atlas.findRegion("playscreen/menu/heart_frame");
+	
+	
+	gui_1 = atlas.findRegion("guiscreen/gui1");
+	gui_2 = atlas.findRegion("guiscreen/gui2");
+	gui_3 = atlas.findRegion("guiscreen/gui3");
+	
+	next = atlas.findRegion("guiscreen/next");
+	next_press = atlas.findRegion("guiscreen/next_press");
+	prev = atlas.findRegion("guiscreen/prev");
+	prev_press = atlas.findRegion("guiscreen/prev_press");
 
 	back_menu_normal = atlas
 		.findRegion("playscreen/menu/statusgame/back_menu_normal");

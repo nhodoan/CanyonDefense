@@ -100,6 +100,10 @@ public class Position {
     public static float BACK_MENU_X = width / 2 - Dimension.BACK_MENU_W / 2;
     public static float BACK_MENU_Y = 110 * height / H;
 
+    public static float GUI_NEXT_X = 600 * width / W;
+    public static float GUI_NEXT_Y = 200 * height / H;
+    public static float GUI_PREV_X = 10 * width / W;
+
     /* Position of Main Play in Play Screen */
 
     public static int genI(float x) {

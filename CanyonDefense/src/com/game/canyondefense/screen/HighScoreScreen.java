@@ -4,9 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.game.canyondefense.GameControl;
+import com.game.canyondefense.global.ManagerRegion;
 
 public class HighScoreScreen extends BaseScreen {
-   private String TAG = "High score screen";
+    private String TAG = "High score screen";
+
     @Override
     public void show() {
 	// TODO Auto-generated method stub
@@ -27,7 +29,8 @@ public class HighScoreScreen extends BaseScreen {
 	stage.act(arg0);
 	sb.begin();
 	/* End Draw */
-	
+	sb.draw(ManagerRegion.star_bg, 0, 0, width, height);
+//	sb.draw(ManagerRegion.high_score_table, x, y, arg0, arg0);
 	sb.end();
 	stage.draw();
 	update(arg0);
@@ -58,7 +61,8 @@ public class HighScoreScreen extends BaseScreen {
     @Override
     public boolean keyDown(int keycode) {
 	if (keycode == Keys.BACK) {
-	    GameControl.getManagerScreen().creatScreen(ManagerScreen.SCREEN_START);
+	    GameControl.getManagerScreen().creatScreen(
+		    ManagerScreen.SCREEN_START);
 	}
 	return super.keyDown(keycode);
     }

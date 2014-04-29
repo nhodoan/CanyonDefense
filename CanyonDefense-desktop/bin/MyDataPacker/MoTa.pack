@@ -81,6 +81,60 @@ MoTa4.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+guiscreen/gui3
+  rotate: false
+  xy: 1, 1208
+  size: 1066, 552
+  orig: 1066, 552
+  offset: 0, 0
+  index: -1
+guiscreen/gui1
+  rotate: false
+  xy: 1, 654
+  size: 1064, 552
+  orig: 1064, 552
+  offset: 0, 0
+  index: -1
+guiscreen/gui2
+  rotate: false
+  xy: 1, 99
+  size: 1062, 553
+  orig: 1062, 553
+  offset: 0, 0
+  index: -1
+guiscreen/next
+  rotate: false
+  xy: 1069, 1664
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+guiscreen/next_press
+  rotate: false
+  xy: 1, 1
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+guiscreen/prev_press
+  rotate: false
+  xy: 1069, 1566
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+guiscreen/prev
+  rotate: false
+  xy: 1167, 1670
+  size: 90, 90
+  orig: 90, 90
+  offset: 0, 0
+  index: -1
+
+MoTa5.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
 highscorescreen/table
   rotate: false
   xy: 1, 1
@@ -89,7 +143,7 @@ highscorescreen/table
   offset: 0, 0
   index: -1
 
-MoTa5.png
+MoTa6.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -143,7 +197,7 @@ mapscreen/map2_press
   offset: 0, 0
   index: -1
 
-MoTa6.png
+MoTa7.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -197,7 +251,7 @@ playscreen/attack/frame_blood
   offset: 0, 0
   index: -1
 
-MoTa7.png
+MoTa8.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -223,7 +277,7 @@ playscreen/brick
   offset: 0, 0
   index: -1
 
-MoTa8.png
+MoTa9.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -270,7 +324,7 @@ playscreen/bullet/shot1
   offset: 0, 0
   index: -1
 
-MoTa9.png
+MoTa10.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -352,7 +406,7 @@ playscreen/defense/defense4_press
   offset: 0, 0
   index: -1
 
-MoTa10.png
+MoTa11.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -455,7 +509,7 @@ playscreen/menu/sound_off_normal
   offset: 0, 0
   index: -1
 
-MoTa11.png
+MoTa12.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -544,7 +598,7 @@ playscreen/menu/number/1
   offset: 0, 0
   index: -1
 
-MoTa12.png
+MoTa13.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -619,7 +673,7 @@ playscreen/menu/statusgame/bg
   offset: 0, 0
   index: -1
 
-MoTa13.png
+MoTa14.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -687,7 +741,7 @@ playscreen/popup/defense4_select_press
   offset: 0, 0
   index: -1
 
-MoTa14.png
+MoTa15.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none

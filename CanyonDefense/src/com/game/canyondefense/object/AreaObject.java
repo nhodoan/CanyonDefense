@@ -189,7 +189,22 @@ public class AreaObject {
 	    x = Position.CONT_GAME_X;
 	    y = Position.CONT_GAME_Y;
 	    break;
-
+	case IDObject.GUI_NEXT:
+	    width = Dimension.GUI_NEXT_W;
+	    height = Dimension.GUI_NEXT_H;
+	    myTexture = ManagerRegion.next;
+	    myTextureWait = ManagerRegion.next_press;
+	    x = Position.GUI_NEXT_X;
+	    y = Position.GUI_NEXT_Y;
+	    break;
+	case IDObject.GUI_PREV:
+	    width = Dimension.GUI_NEXT_W;
+	    height = Dimension.GUI_NEXT_H;
+	    myTexture = ManagerRegion.prev;
+	    myTextureWait = ManagerRegion.prev_press;
+	    x = Position.GUI_PREV_X;
+	    y = Position.GUI_NEXT_Y;
+	    break;
 //	case IDObject.PLAY_MENU_FIRE_1:
 //	    x = Position.PLAY_MENU_FIRE_1_X;
 //	    y = Position.PLAY_MENU_FIRE_Y;

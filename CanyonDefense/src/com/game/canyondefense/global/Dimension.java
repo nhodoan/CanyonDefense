@@ -107,11 +107,14 @@ public class Dimension {
 
     public static float REPLAY_GAME_W = 100 * width / W;
     public static float REPLAY_GAME_H = 50 * height / H;
-    
+
     public static float CONT_GAME_W = 150 * width / W;
     public static float CONT_GAME_H = 50 * height / H;
 
     public static float BACK_MENU_W = 150 * width / W;
     public static float BACK_MENU_H = 80 * height / H;
+
+    public static float GUI_NEXT_W = 40 * width / W;
+    public static float GUI_NEXT_H = 80 * height / H;
 
 }
