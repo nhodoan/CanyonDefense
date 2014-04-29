@@ -108,9 +108,9 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	if (level == 1) {
 	    fileData = "MyData\\data\\game1.dat";
 	} else if (level == 2) {
-	    fileData = "MyData\\data\\game1.dat";
+	    fileData = "MyData\\data\\game2.dat";
 	} else {
-	    fileData = "MyData\\data\\game1.dat";
+	    fileData = "MyData\\data\\game3.dat";
 	}
 	list_attack_object = new ArrayList<AttackObject>();
 	list_defense_object = new ArrayList<DefenseObject>();
@@ -392,15 +392,14 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 		    .get(i).getX(), list_attack_object.get(i).getY(),
 		    list_attack_object.get(i).getWidth(), list_attack_object
 			    .get(i).getHeight());
-	    sb.draw(ManagerRegion.frame_blood, list_attack_object.get(i).getX()
-		    + Dimension.ATTACK_W / 5, list_attack_object.get(i).getY()
-		    + Dimension.ATTACK_H, Dimension.ATTACK_W,
+	    sb.draw(ManagerRegion.frame_blood,
+		    list_attack_object.get(i).getX(), list_attack_object.get(i)
+			    .getY() + Dimension.ATTACK_H, Dimension.ATTACK_W,
 		    Dimension.ATTACK_H / 10);
-	    sb.draw(ManagerRegion.blood, list_attack_object.get(i).getX()
-		    + Dimension.ATTACK_W / 5, list_attack_object.get(i).getY()
-		    + Dimension.ATTACK_H, Dimension.ATTACK_W
-		    * list_attack_object.get(i).getBlood()
-		    / list_attack_object.get(i).getMax_blood(),
+	    sb.draw(ManagerRegion.blood, list_attack_object.get(i).getX(),
+		    list_attack_object.get(i).getY() + Dimension.ATTACK_H,
+		    Dimension.ATTACK_W * list_attack_object.get(i).getBlood()
+			    / list_attack_object.get(i).getMax_blood(),
 		    Dimension.ATTACK_H / 10);
 	}
     }

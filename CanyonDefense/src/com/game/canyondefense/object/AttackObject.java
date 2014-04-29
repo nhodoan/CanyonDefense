@@ -47,25 +47,25 @@ public class AttackObject {
 	    blood = 80;
 	    speed = 40;
 	    allTextureRegion = ManagerRegion.all_attack_ground_1;
-	    gold = 30;
+	    gold = 10;
 	    break;
 	case IDPerson.ATTACK_GROUND_2:
 	    blood = 100;
 	    speed = 45;
 	    allTextureRegion = ManagerRegion.all_attack_ground_2;
-	    gold = 50;
+	    gold = 20;
 	    break;
 	case IDPerson.ATTACK_AIR_1:
 	    allTextureRegion = ManagerRegion.all_attack_air_1;
 	    speed = 40;
 	    blood = 100;
-	    gold = 50;
+	    gold = 20;
 	    break;
 	case IDPerson.ATTACK_AIR_2:
 	    allTextureRegion = ManagerRegion.all_attack_air_2;
 	    speed = 50;
 	    blood = 150;
-	    gold = 70;
+	    gold = 30;
 	    break;
 	}
 	
