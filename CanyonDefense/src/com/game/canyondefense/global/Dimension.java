@@ -54,11 +54,11 @@ public class Dimension {
     public static float BRICK_W = 40 * width / W;
     public static float BRICK_H = 40 * height / H;
 
-    public static float FIRE_W = 40 * width / W;
-    public static float FIRE_H = 40 * height / H;
+    public static float FIRE_W = 60 * width / W;
+    public static float FIRE_H = 60 * height / H;
 
-    public static float PLAY_MENU_PLAY_W = width * 30 / W;
-    public static float PLAY_MENU_PLAY_H = height * 30 / H;
+    public static float PLAY_MENU_PLAY_W = width * 40 / W;
+    public static float PLAY_MENU_PLAY_H = height * 40 / H;
 
     public static float MENU_GOLD_FRAME_W = width * 100 / W;
     public static float MENU_GOLD_FRAME_H = height * 40 / H;
@@ -93,8 +93,8 @@ public class Dimension {
 
     /* Position of Main Play in Play Screen */
 
-    public static float ATTACK_W = width * 50 / W;
-    public static float ATTACK_H = height * 50 / H;
+    public static float ATTACK_W = width * 30 / W;
+    public static float ATTACK_H = height * 30 / H;
 
     public static float DEFENSE_W = width * 40 / W;
     public static float DEFENSE_H = height * 40 / H;

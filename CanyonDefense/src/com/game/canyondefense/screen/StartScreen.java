@@ -15,7 +15,7 @@ public class StartScreen extends BaseScreen implements InputProcessor {
     long timeStart = 0l;
     private final String TAG = "Start Screen";
 
-    private AreaObject start_play, start_help, start_high_score;
+    private AreaObject start_play, start_help, start_high_score, sound;
 
     @Override
     public void show() {
@@ -30,7 +30,14 @@ public class StartScreen extends BaseScreen implements InputProcessor {
 	start_play = new AreaObject(IDObject.START_PLAY);
 	start_help = new AreaObject(IDObject.START_HELP);
 	start_high_score = new AreaObject(IDObject.START_HIGH_SCORE);
-
+	sound = new AreaObject(IDObject.PLAY_MENU_SOUND);
+	if (GameControl.isSound) {
+	    sound.setMyTexture(ManagerRegion.sound_on_normal);
+	    sound.setMyTextureWait(ManagerRegion.sound_on_press);
+	} else {
+	    sound.setMyTexture(ManagerRegion.sound_off_normal);
+	    sound.setMyTextureWait(ManagerRegion.sound_off_press);
+	}
     }
 
     @Override
@@ -52,6 +59,9 @@ public class StartScreen extends BaseScreen implements InputProcessor {
 	sb.draw(start_high_score.getTexture(), start_high_score.getX(),
 		start_high_score.getY(), start_high_score.getWidth(),
 		start_high_score.getHeight());
+
+	sb.draw(sound.getTexture(), sound.getX(), sound.getY(),
+		sound.getWidth(), sound.getHeight());
 	/* End Draw */
 	sb.end();
 	stage.draw();
@@ -64,10 +74,12 @@ public class StartScreen extends BaseScreen implements InputProcessor {
      * @param time
      */
     private void update(float time) {
-	if (System.currentTimeMillis() - timeStart > 3000) {
-	    // Gdx.app.log(TAG, "Switch to Level Select Screen");
-	    // GameControl.getManagerScreen().creatScreen(
-	    // ManagerScreen.SCREEN_LEVEL);
+	if (GameControl.isSound) {
+	    sound.setMyTexture(ManagerRegion.sound_on_normal);
+	    sound.setMyTextureWait(ManagerRegion.sound_on_press);
+	} else {
+	    sound.setMyTexture(ManagerRegion.sound_off_normal);
+	    sound.setMyTextureWait(ManagerRegion.sound_off_press);
 	}
     }
 
@@ -81,6 +93,8 @@ public class StartScreen extends BaseScreen implements InputProcessor {
 	    start_help.setCanPress(false);
 	} else if (start_high_score.isInBound(screenX, height - screenY)) {
 	    start_high_score.setCanPress(false);
+	}else if (sound.isInBound(screenX, height - screenY)) {
+	    sound.setCanPress(false);
 	}
 	return false;
     }
@@ -88,7 +102,7 @@ public class StartScreen extends BaseScreen implements InputProcessor {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 	// TODO Auto-generated method stub
-//	super.touchUp(screenX, screenY, pointer, button);
+	// super.touchUp(screenX, screenY, pointer, button);
 	Gdx.app.log(TAG, "Touch Up Child");
 	if (start_play.isInBound(screenX, height - screenY)
 		&& !start_play.canPress()) {
@@ -97,9 +111,17 @@ public class StartScreen extends BaseScreen implements InputProcessor {
 	    super.touchUp(screenX, screenY, pointer, button);
 	} else if (start_help.isInBound(screenX, height - screenY)
 		&& !start_help.canPress()) {
+	    GameControl.getManagerScreen()
+	    .creatScreen(ManagerScreen.SCREEN_HELP);
 	    super.touchUp(screenX, screenY, pointer, button);
 	} else if (start_high_score.isInBound(screenX, height - screenY)
 		&& !start_high_score.canPress()) {
+	    GameControl.getManagerScreen()
+	    .creatScreen(ManagerScreen.SCREEN_HIGH);
+	    super.touchUp(screenX, screenY, pointer, button);
+	}else if (sound.isInBound(screenX, height - screenY)
+		&& !sound.canPress()) {
+	    GameControl.isSound = !GameControl.isSound;
 	    super.touchUp(screenX, screenY, pointer, button);
 	}
 
@@ -116,7 +138,7 @@ public class StartScreen extends BaseScreen implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-	if(keycode == Keys.BACK){
+	if (keycode == Keys.BACK) {
 	    Gdx.app.exit();
 	}
 	return super.keyDown(keycode);

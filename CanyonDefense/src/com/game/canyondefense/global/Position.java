@@ -13,11 +13,12 @@ public class Position {
     /**
      * Positon of Start Screen
      */
-    public static float START_PLAY_X = width * 240 / W;
+    public static float START_PLAY_X = width / 2 - Dimension.START_PLAY_W / 2;
     public static float START_PLAY_Y = height * 240 / H;
-    public static float START_HELP_X = width * 250 / W;
+    public static float START_HELP_X = width / 2 - Dimension.START_HELP_W / 2;
     public static float START_HELP_Y = height * 160 / H;
-    public static float START_HIGH_SCORE_X = width * 250 / W;
+    public static float START_HIGH_SCORE_X = width / 2
+	    - Dimension.START_HIGH_SCORE_W / 2;
     public static float START_HIGH_SCORE_Y = height * 80 / H;
 
     /**
@@ -50,7 +51,7 @@ public class Position {
     public static float MENU_Y = 0;
 
     public static float PLAY_MENU_PLAY_X = 5 * width / W;
-    public static float PLAY_MENU_PLAY_Y = 440 * height / H;
+    public static float PLAY_MENU_PLAY_Y = 435 * height / H;
 
     public static float MENU_GOLD_FRAME_X = 535 * width / W;
     public static float MENU_GOLD_FRAME_Y = 440 * height / H;
@@ -67,11 +68,11 @@ public class Position {
     public static float MENU_TEXT_HEART_Y = 20 * height / H;
     public static float MENU_HEART_TEXT_X_START = 50 * width / W;
 
-    public static float PLAY_MENU_FIRE_1_X = 540 * width / W;
-    public static float PLAY_MENU_FIRE_2_X = 590 * width / W;
+    public static float PLAY_MENU_FIRE_1_X = 510 * width / W;
+    public static float PLAY_MENU_FIRE_2_X = 570 * width / W;
     public static float PLAY_MENU_FIRE_Y = 10 * height / H;
 
-    public static float PLAY_MENU_SOUND_X = 540 * width / W;
+    public static float PLAY_MENU_SOUND_X = 600 * width / W;
     public static float PLAY_MENU_SOUND_Y = 420 * height / H;
     public static float PLAY_MENU_QUIT_X = 590 * width / W;
     public static float PLAY_MENU_QUIT_Y = 420 * height / H;
@@ -85,19 +86,19 @@ public class Position {
 
     public static float PLAY_ATTACK_X = 20 * width / W;
     public static float PLAY_ATTACK_Y = 310 * height / H;
-    
-    
-    public static float ICON_STATUS_GAME_X = 200*width/W;
+
+    public static float ICON_STATUS_GAME_X = width / 2
+	    - Dimension.ICON_STATUS_GAME_W / 2;
     public static float ICON_STATUS_GAME_Y = 330 * height / H;
-    
-    public static float REPLAY_GAME_X = 270*width/W;
-    public static float REPLAY_GAME_Y = 200*height/H;
-    
-    public static float CONT_GAME_X = 240*width/W;
-    public static float CONT_GAME_Y = 270*height/H;
-    
-    public static float BACK_MENU_X = 240 * width/W;
-    public static float BACK_MENU_Y = 110*height / H;
+
+    public static float REPLAY_GAME_X = width / 2 - Dimension.REPLAY_GAME_W / 2;
+    public static float REPLAY_GAME_Y = 200 * height / H;
+
+    public static float CONT_GAME_X = width / 2 - Dimension.CONT_GAME_W / 2;
+    public static float CONT_GAME_Y = 270 * height / H;
+
+    public static float BACK_MENU_X = width / 2 - Dimension.BACK_MENU_W / 2;
+    public static float BACK_MENU_Y = 110 * height / H;
 
     /* Position of Main Play in Play Screen */
 

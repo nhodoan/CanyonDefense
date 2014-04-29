@@ -28,35 +28,35 @@ public class AttackGroundObject extends AttackObject {
 	switch (statusMove) {
 	case 0:
 	    pRight++;
-	    if (pRight == 20)
+	    if (pRight == 40)
 		pRight = 0;
-	    texture = new TextureRegion(allTextureRegion, (pRight / 5) * 40,
-		    100, 40, 50);
+	    texture = new TextureRegion(allTextureRegion, (pRight / 5) * 32,
+		    0, 32, 32);
 	    x = x + speed * deltatime;
 	    break;
 	case 1:
 	    pLeft++;
-	    if (pLeft == 20)
+	    if (pLeft == 40)
 		pLeft = 0;
-	    texture = new TextureRegion(allTextureRegion, (pLeft / 5) * 40, 50,
-		    40, 50);
+	    texture = new TextureRegion(allTextureRegion, (pLeft / 5) * 32, 32,
+		    32, 32);
 
 	    x = x - speed * deltatime;
 	    break;
 	case 2:
 	    pDown++;
-	    if (pDown == 20)
+	    if (pDown == 40)
 		pDown = 0;
-	    texture = new TextureRegion(allTextureRegion, (pDown / 5) * 40, 0,
-		    40, 50);
+	    texture = new TextureRegion(allTextureRegion, (pDown / 5) * 32, 96,
+		    32, 32);
 	    y = y - speed * deltatime;
 	    break;
 	case 3:
 	    pUp++;
-	    if (pUp == 20)
+	    if (pUp == 40)
 		pUp = 0;
-	    texture = new TextureRegion(allTextureRegion, (pUp / 5) * 40, 150,
-		    40, 50);
+	    texture = new TextureRegion(allTextureRegion, (pUp / 5) * 32, 64,
+		    32, 32);
 
 	    y = y + speed * deltatime;
 	    break;

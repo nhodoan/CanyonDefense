@@ -46,8 +46,8 @@ public class DefenseObject {
 		power = 25;
 		break;
 	    case IDPerson.DEFENSE_AIR_2:
-		textureRegion_normal = ManagerRegion.defense3_normal;
-		textureRegion_press = ManagerRegion.defense3_press;
+		textureRegion_normal = ManagerRegion.defense4_normal;
+		textureRegion_press = ManagerRegion.defense4_press;
 		sale = Sale.AIR_2;
 		power = 40;
 		break;

@@ -16,6 +16,7 @@ public class GameControl extends Game {
     public static float WIDTH_DEBUG = 640;
     public static float HEIGHT_DEBUG = 480;
     public static AndroidInterface androidInterface;
+    public static boolean isSound = true;
 
     @SuppressWarnings("static-access")
     public GameControl(AndroidInterface androidInterface) {

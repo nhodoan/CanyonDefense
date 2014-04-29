@@ -34,6 +34,7 @@ import com.game.canyondefense.object.DefenseGroundObject;
 import com.game.canyondefense.object.DefenseObject;
 import com.game.canyondefense.object.Fire;
 import com.game.canyondefense.object.FireAttack;
+import com.game.canyondefense.object.GoldAdd;
 import com.game.canyondefense.utils.Collision;
 
 public class PlayScreen extends BaseScreen implements InputProcessor {
@@ -62,6 +63,7 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
     private boolean startWave = false;
 
     private Integer[] mapData;
+    private String fileData, fileMap;
     private int sumAttack = 0;
     private boolean showPopupSelectDefense = false;
     private boolean select_defense = false;
@@ -70,6 +72,7 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 
     private int gold = 1000;
     private int heart = 20;
+    private int positionSelectI, positionSelectJ;
 
     private int maxWave, currentWave;
     private boolean isShowNewAttack = false;
@@ -78,6 +81,8 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 
     // private DefenseGroundObject testDefense;
     private ArrayList<ParticleEffect> listEffect;
+    private ArrayList<GoldAdd> listGoldAdd;
+
     private TextureRegion[] arrayTextureNumber = { ManagerRegion.number0,
 	    ManagerRegion.number1, ManagerRegion.number2,
 	    ManagerRegion.number3, ManagerRegion.number4,
@@ -93,7 +98,20 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	Gdx.input.setInputProcessor(this);
 
 	/* Init data */
-	mapData = MapData.map1;
+	if (map == 1) {
+	    fileMap = "MyData\\data\\map1.dat";
+	} else if (map == 2) {
+	    fileMap = "MyData\\data\\map2.dat";
+	} else {
+	    fileMap = "MyData\\data\\map3.dat";
+	}
+	if (level == 1) {
+	    fileData = "MyData\\data\\game1.dat";
+	} else if (level == 2) {
+	    fileData = "MyData\\data\\game1.dat";
+	} else {
+	    fileData = "MyData\\data\\game1.dat";
+	}
 	list_attack_object = new ArrayList<AttackObject>();
 	list_defense_object = new ArrayList<DefenseObject>();
 	// list_attack_object.add(new Att)
@@ -101,7 +119,8 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	allData = new ArrayList<ArrayList<Integer>>();
 	listEffect = new ArrayList<ParticleEffect>();
 
-	loadData();
+	loadDataGame();
+	loadDataMap();
 	maxWave = allData.size() - 1;
 	currentWave = 0;
 	// list_attack_object.get(i) = new
@@ -129,11 +148,40 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	back_menu = new AreaObject(IDObject.BACK_MENU);
 	continue_game = new AreaObject(IDObject.CONT_GAME);
 
+	listGoldAdd = new ArrayList<GoldAdd>();
+	// for (int i = 0; i < MapData.rows; i++) {
+	// for (int j = 0; j < MapData.columns; j++) {
+	// System.out.print(mapData[i * MapData.columns + j]);
+	// }
+	// System.out.println();
+	// }
     }
 
-    private void loadData() {
+    private void loadDataMap() {
+	mapData = new Integer[MapData.rows * MapData.columns];
 	try {
-	    FileHandle file = Gdx.files.internal("MyData\\data\\game1.dat");
+	    FileHandle file = Gdx.files.internal(fileMap);
+	    InputStream ips = file.read();
+	    InputStreamReader ipsr = new InputStreamReader(ips);
+	    BufferedReader br = new BufferedReader(ipsr);
+	    String line;
+	    int count = 0;
+	    while ((line = br.readLine()) != null) {
+		String[] splitLine = line.split(",");
+		for (String x : splitLine) {
+		    mapData[count] = Integer.parseInt(x);
+		    count++;
+		}
+	    }
+	    br.close();
+	} catch (Exception e) {
+	    System.out.println(e.toString());
+	}
+    }
+
+    private void loadDataGame() {
+	try {
+	    FileHandle file = Gdx.files.internal(fileData);
 	    InputStream ips = file.read();
 	    InputStreamReader ipsr = new InputStreamReader(ips);
 	    BufferedReader br = new BufferedReader(ipsr);
@@ -191,6 +239,12 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 
 	/* Render bullet */
 	renderBullet(sb);
+
+	/* Render golds add */
+	for (GoldAdd goldAdd : listGoldAdd) {
+	    renderNumberGold(sb, goldAdd.getX(), goldAdd.getY(),
+		    goldAdd.getGold());
+	}
 
 	renderPopupSelectDefense(sb);
 	for (ParticleEffect particleEffect : listEffect) {
@@ -283,6 +337,26 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 		fire_power_2.getHeight());
     }
 
+    public void renderNumberGold(SpriteBatch sb, float x, float y, int number) {
+	int countNumber = 0;
+	if (number > 0) {
+	    countNumber = 1 + (int) Math.log10(number);
+	}
+	sb.draw(ManagerRegion.plus, x, y, Dimension.MENU_TEXT_W * 2 / 3,
+		Dimension.MENU_TEXT_H * 2 / 3);
+	x += Dimension.MENU_TEXT_W * 2 / 3;
+	for (int i = 0; i < countNumber; i++) {
+	    int numberDraw = number / ((int) Math.pow(10, countNumber - i - 1));
+	    /* Draw number here */
+	    sb.draw(arrayTextureNumber[numberDraw], x, y,
+		    Dimension.MENU_TEXT_W * 2 / 3,
+		    Dimension.MENU_TEXT_H * 2 / 3);
+	    x += Dimension.MENU_TEXT_W * 2 / 3;
+	    number = number - numberDraw
+		    * (int) Math.pow(10, countNumber - i - 1);
+	}
+    }
+
     public void renderDefense(SpriteBatch sb) {
 	select_defense = false;
 	for (DefenseObject defenseObject : list_defense_object) {
@@ -320,13 +394,13 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 			    .get(i).getHeight());
 	    sb.draw(ManagerRegion.frame_blood, list_attack_object.get(i).getX()
 		    + Dimension.ATTACK_W / 5, list_attack_object.get(i).getY()
-		    + Dimension.ATTACK_H, Dimension.ATTACK_W * 3 / 5,
+		    + Dimension.ATTACK_H, Dimension.ATTACK_W,
 		    Dimension.ATTACK_H / 10);
 	    sb.draw(ManagerRegion.blood, list_attack_object.get(i).getX()
 		    + Dimension.ATTACK_W / 5, list_attack_object.get(i).getY()
-		    + Dimension.ATTACK_H, Dimension.ATTACK_W * 3
+		    + Dimension.ATTACK_H, Dimension.ATTACK_W
 		    * list_attack_object.get(i).getBlood()
-		    / list_attack_object.get(i).getMax_blood() / 5,
+		    / list_attack_object.get(i).getMax_blood(),
 		    Dimension.ATTACK_H / 10);
 	}
     }
@@ -335,17 +409,33 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	for (int i = 0; i < MapData.rows; i++) {
 	    for (int j = 0; j < MapData.columns; j++) {
 		if (mapData[i * MapData.columns + j] == 0) {
+
 		    sb.draw(ManagerRegion.brick, j * Dimension.BRICK_W, height
 			    - (i + 1) * Dimension.BRICK_H, Dimension.BRICK_W,
 			    Dimension.BRICK_H);
+
 		} else if (mapData[i * MapData.columns + j] == 2) {
 		    sb.draw(ManagerRegion.tree, j * Dimension.BRICK_W, height
 			    - (i + 1) * Dimension.BRICK_H, Dimension.BRICK_W,
 			    Dimension.BRICK_H);
 		} else {
-		    sb.draw(ManagerRegion.ground, j * Dimension.BRICK_W, height
-			    - (i + 1) * Dimension.BRICK_H, Dimension.BRICK_W,
-			    Dimension.BRICK_H);
+		    if (showPopupSelectDefense && j == positionSelectI
+			    && i == positionSelectJ) {
+			Color c = sb.getColor();
+			float oldAlpha = c.a;
+			c.a = oldAlpha * 1.1f;
+			sb.setColor(c);
+
+			sb.draw(ManagerRegion.ground, j * Dimension.BRICK_W,
+				height - (i + 1) * Dimension.BRICK_H,
+				Dimension.BRICK_W, Dimension.BRICK_H);
+			c.a = oldAlpha;
+			sb.setColor(c);
+		    } else {
+			sb.draw(ManagerRegion.ground, j * Dimension.BRICK_W,
+				height - (i + 1) * Dimension.BRICK_H,
+				Dimension.BRICK_W, Dimension.BRICK_H);
+		    }
 		}
 	    }
 	}
@@ -355,7 +445,7 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	sb.draw(ManagerRegion.gold_frame, Position.MENU_GOLD_FRAME_X,
 		Position.MENU_GOLD_FRAME_Y, Dimension.MENU_GOLD_FRAME_W,
 		Dimension.MENU_GOLD_FRAME_H);
-	int countNumber = 0;
+	int countNumber = 1;
 	if (gold > 0) {
 	    countNumber = 1 + (int) Math.log10(gold);
 	}
@@ -722,6 +812,16 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 		}
 	    }
 
+	    /* Control animation golds add */
+	    for (Iterator<GoldAdd> it = listGoldAdd.iterator(); it.hasNext();) {
+		GoldAdd goldAdd = it.next();
+		if (goldAdd.getY() > Position.MENU_GOLD_FRAME_Y) {
+		    it.remove();
+		} else {
+		    goldAdd.move();
+		}
+	    }
+
 	    /* Check attack object */
 
 	    for (Iterator<AttackObject> it = list_attack_object.iterator(); it
@@ -730,6 +830,7 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 		if (attackObject.isDead()) {
 		    it.remove();
 		    gold += attackObject.getGold();
+		    listGoldAdd.add(new GoldAdd(attackObject.getGold()));
 		}
 	    }
 
@@ -940,6 +1041,7 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 			    addDefense.setY(Position
 				    .genYFromFloat(popup_defense_ground_1
 					    .getY() - Dimension.BRICK_H / 2));
+			    addDefense.setPress(true);
 			    list_defense_object.add(addDefense);
 			    gold -= Sale.GROUND_1;
 			    mapData[Position.genJ(addDefense.getY()
@@ -962,6 +1064,7 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 			    addDefense.setY(Position
 				    .genYFromFloat(popup_defense_ground_1
 					    .getY() - Dimension.BRICK_H / 2));
+			    addDefense.setPress(true);
 			    list_defense_object.add(addDefense);
 			    gold -= Sale.GROUND_2;
 			    mapData[Position.genJ(addDefense.getY()
@@ -984,6 +1087,7 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 			    addDefense.setY(Position
 				    .genYFromFloat(popup_defense_ground_1
 					    .getY() - Dimension.BRICK_H / 2));
+			    addDefense.setPress(true);
 			    list_defense_object.add(addDefense);
 			    gold -= Sale.AIR_1;
 			    mapData[Position.genJ(addDefense.getY()
@@ -1006,6 +1110,7 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 			    addDefense.setY(Position
 				    .genYFromFloat(popup_defense_ground_1
 					    .getY() - Dimension.BRICK_H / 2));
+			    addDefense.setPress(true);
 			    list_defense_object.add(addDefense);
 			    gold -= Sale.AIR_2;
 			    mapData[Position.genJ(addDefense.getY()
@@ -1027,6 +1132,8 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 		/* Check to show popup select new defense */
 		int i = (int) (screenX / Dimension.BRICK_W);
 		int j = (int) (screenY / Dimension.BRICK_H);
+		positionSelectI = i;
+		positionSelectJ = j;
 		showPopupSelectDefense = false;
 		if (mapData[MapData.columns * j + i] == 1) {
 		    showPopupSelectDefense = true;
@@ -1067,4 +1174,27 @@ public class PlayScreen extends BaseScreen implements InputProcessor {
 	}
 	return super.keyDown(keycode);
     }
+
+    @Override
+    public void pause() {
+	// TODO Auto-generated method stub
+	super.pause();
+    }
+
+    @Override
+    public void resume() {
+	// TODO Auto-generated method stub
+	super.resume();
+    }
+
+    // @Override
+    // public void dispose() {
+    // // TODO Auto-generated method stub
+    // super.dispose();
+    //
+    // list_defense_object.clear();
+    // Gdx.app.log(TAG,
+    // "-----------------------Disposcreen========================");
+    // }
+
 }

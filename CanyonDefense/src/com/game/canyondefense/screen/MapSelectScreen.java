@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.game.canyondefense.GameControl;
 import com.game.canyondefense.global.IDObject;
+import com.game.canyondefense.global.ManagerRegion;
 import com.game.canyondefense.object.AreaObject;
 
 public class MapSelectScreen extends BaseScreen implements InputProcessor {
@@ -39,6 +40,7 @@ public class MapSelectScreen extends BaseScreen implements InputProcessor {
 
 	sb.begin();
 	/* Draw Texure region here */
+	sb.draw(ManagerRegion.map_bg, 0, 0, width, height);
 	sb.draw(map_1.getTexture(), map_1.getX(), map_1.getY(),
 		map_1.getWidth(), map_1.getHeight());
 	sb.draw(map_2.getTexture(), map_2.getX(), map_2.getY(),
@@ -78,15 +80,23 @@ public class MapSelectScreen extends BaseScreen implements InputProcessor {
 	// super.touchUp(screenX, screenY, pointer, button);
 
 	if (map_1.isInBound(screenX, height - screenY) && !map_1.canPress()) {
+	    
+	    super.touchUp(screenX, screenY, pointer, button);
+	    PlayScreen.map = 1;
 	    GameControl.getManagerScreen().creatScreen(
 		    ManagerScreen.SCREEN_DIFF);
-	    super.touchUp(screenX, screenY, pointer, button);
 	} else if (map_2.isInBound(screenX, height - screenY)
 		&& !map_2.canPress()) {
 	    super.touchUp(screenX, screenY, pointer, button);
+	    PlayScreen.map = 2;
+	    GameControl.getManagerScreen().creatScreen(
+		    ManagerScreen.SCREEN_DIFF);
 	} else if (map_3.isInBound(screenX, height - screenY)
 		&& !map_3.canPress()) {
 	    super.touchUp(screenX, screenY, pointer, button);
+	    PlayScreen.map = 3;
+	    GameControl.getManagerScreen().creatScreen(
+		    ManagerScreen.SCREEN_DIFF);
 	}
 
 	if (!map_1.canPress()) {

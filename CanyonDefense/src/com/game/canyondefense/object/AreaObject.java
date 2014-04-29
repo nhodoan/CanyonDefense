@@ -113,8 +113,8 @@ public class AreaObject {
 	    y = Position.PLAY_MENU_SOUND_Y;
 	    width = Dimension.PLAY_MENU_SOUND_W;
 	    height = Dimension.PLAY_MENU_SOUND_H;
-	    myTexture = ManagerRegion.play_menu_sound_on_normal;
-	    myTextureWait = ManagerRegion.play_menu_sound_on_press;
+	    myTexture = ManagerRegion.sound_on_normal;
+	    myTextureWait = ManagerRegion.sound_on_press;
 	    break;
 	case IDObject.PLAY_MENU_QUIT:
 	    x = Position.PLAY_MENU_QUIT_X;
@@ -146,8 +146,8 @@ public class AreaObject {
 	case IDObject.PLAY_POPUP_DEFENSE_AIR_2:
 	    width = Dimension.PLAY_MENU_DEFENSE_3_W;
 	    height = Dimension.PLAY_MENU_DEFENSE_3_H;
-	    myTexture = ManagerRegion.play_menu_defense_3_normal;
-	    myTextureWait = ManagerRegion.play_menu_defense_3_press;
+	    myTexture = ManagerRegion.play_menu_defense_4_normal;
+	    myTextureWait = ManagerRegion.play_menu_defense_4_press;
 	    break;
 	case IDObject.PLAY_MENU_SELL:
 	    width = Dimension.PLAY_MENU_SELL_DEFENSE_W;

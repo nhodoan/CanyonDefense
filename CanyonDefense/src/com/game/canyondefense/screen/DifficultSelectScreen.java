@@ -4,16 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.game.canyondefense.GameControl;
 import com.game.canyondefense.global.IDObject;
+import com.game.canyondefense.global.ManagerRegion;
 import com.game.canyondefense.object.AreaObject;
 
 public class DifficultSelectScreen extends BaseScreen implements InputProcessor {
 
     @SuppressWarnings("unused")
     private final String TAG = "Difficule Select Screen";
-    AtlasRegion bg;
+    
     long timeStart = 0l;
     private AreaObject diff_easy, diff_normal, diff_hard;
 
@@ -23,7 +23,6 @@ public class DifficultSelectScreen extends BaseScreen implements InputProcessor 
 	super.show();
 	Gdx.input.setCatchBackKey(true);
 	Gdx.input.setInputProcessor(this);
-	bg = GameControl.getAtlas().findRegion("data/loading");
 	timeStart = System.currentTimeMillis();
 
 	diff_easy = new AreaObject(IDObject.DIFF_EASY);
@@ -42,6 +41,8 @@ public class DifficultSelectScreen extends BaseScreen implements InputProcessor 
 
 	sb.begin();
 	/* Draw all texure here */
+	
+	sb.draw(ManagerRegion.diff_bg, 0, 0, width, height);
 	sb.draw(diff_easy.getTexture(), diff_easy.getX(), diff_easy.getY(),
 		diff_easy.getWidth(), diff_easy.getHeight());
 	sb.draw(diff_normal.getTexture(), diff_normal.getX(),
@@ -85,12 +86,18 @@ public class DifficultSelectScreen extends BaseScreen implements InputProcessor 
 	if (diff_easy.isInBound(screenX, height - screenY)
 		&& !diff_easy.canPress()) {
 	    super.touchUp(screenX, screenY, pointer, button);
+	    PlayScreen.level = 1;
+	    GameControl.getManagerScreen().creatScreen(ManagerScreen.SCREEN_PLAY);
 	} else if (diff_normal.isInBound(screenX, height - screenY)
 		&& !diff_normal.canPress()) {
 	    super.touchUp(screenX, screenY, pointer, button);
+	    PlayScreen.level = 2;
+	    GameControl.getManagerScreen().creatScreen(ManagerScreen.SCREEN_PLAY);
 	} else if (diff_hard.isInBound(screenX, height - screenY)
 		&& !diff_hard.canPress()) {
 	    super.touchUp(screenX, screenY, pointer, button);
+	    PlayScreen.level = 3;
+	    GameControl.getManagerScreen().creatScreen(ManagerScreen.SCREEN_PLAY);
 	}
 
 	if (!diff_easy.canPress()) {
@@ -101,7 +108,7 @@ public class DifficultSelectScreen extends BaseScreen implements InputProcessor 
 	    diff_hard.setCanPress(true);
 	}
 
-	GameControl.getManagerScreen().creatScreen(ManagerScreen.SCREEN_PLAY);
+	
 
 	return false;
     }

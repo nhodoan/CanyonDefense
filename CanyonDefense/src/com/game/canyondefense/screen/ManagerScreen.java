@@ -10,6 +10,8 @@ public class ManagerScreen {
 	public static int SCREEN_MAP = 2;	
 	public static int SCREEN_DIFF = 3;
 	public static int SCREEN_PLAY = 4;
+	public static int SCREEN_HIGH = 5;
+	public static int SCREEN_HELP = 6;
 
 	private int idMomentScreen;
 
@@ -74,6 +76,18 @@ public class ManagerScreen {
 			clearScreen();
 			idMomentScreen = -1;
 			momentScreen = new PlayScreen();
+			momentScreen.show();
+			return momentScreen;
+		case 5:
+			clearScreen();
+			idMomentScreen = -1;
+			momentScreen = new HighScoreScreen();
+			momentScreen.show();
+			return momentScreen;
+		case 6:
+			clearScreen();
+			idMomentScreen = -1;
+			momentScreen = new HelpScreen();
 			momentScreen.show();
 			return momentScreen;
 		}

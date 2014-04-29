@@ -56,13 +56,13 @@ public class AttackObject {
 	    gold = 50;
 	    break;
 	case IDPerson.ATTACK_AIR_1:
-	    allTextureRegion = ManagerRegion.all_attack_air;
+	    allTextureRegion = ManagerRegion.all_attack_air_1;
 	    speed = 40;
 	    blood = 100;
 	    gold = 50;
 	    break;
 	case IDPerson.ATTACK_AIR_2:
-	    allTextureRegion = ManagerRegion.all_attack_air;
+	    allTextureRegion = ManagerRegion.all_attack_air_2;
 	    speed = 50;
 	    blood = 150;
 	    gold = 70;

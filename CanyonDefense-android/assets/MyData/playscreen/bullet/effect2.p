@@ -42,20 +42,20 @@ shape: ellipse
 edges: false
 side: both
 - Spawn Width - 
-lowMin: 100.0
-lowMax: 100.0
-highMin: 100.0
-highMax: 100.0
+lowMin: 150.0
+lowMax: 150.0
+highMin: 150.0
+highMax: 150.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
 timelineCount: 1
 timeline0: 0.0
 - Spawn Height - 
-lowMin: 100.0
-lowMax: 100.0
-highMin: 100.0
-highMax: 100.0
+lowMin: 150.0
+lowMax: 150.0
+highMin: 150.0
+highMax: 150.0
 relative: false
 scalingCount: 1
 scaling0: 1.0

@@ -12,7 +12,8 @@ public class MainActivity extends AndroidApplication implements
 	AndroidInterface {
 
     private SoundPool soundPool;
-    private int click, fire, win, lose, heart_die, start_wave, attack,show_popup;
+    private int click, fire, win, lose, heart_die, start_wave, attack,
+	    show_popup;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,9 @@ public class MainActivity extends AndroidApplication implements
     @Override
     public void soundClick() {
 	// TODO Auto-generated method stub
-	soundPool.play(click, 1, 1, 0, 0, 1);
+	if (GameControl.isSound) {
+	    soundPool.play(click, 1, 1, 0, 0, 1);
+	}
     }
 
     @Override
@@ -48,13 +51,17 @@ public class MainActivity extends AndroidApplication implements
     @Override
     public void soundFire() {
 	// TODO Auto-generated method stub
-	soundPool.play(fire, 1, 1, 0, 0, 1);
+	if (GameControl.isSound) {
+	    soundPool.play(fire, 1, 1, 0, 0, 1);
+	}
     }
 
     @Override
     public void soundDefense() {
 	// TODO Auto-generated method stub
-	soundPool.play(attack, 1, 1, 0, 0, 1);
+	if (GameControl.isSound) {
+	    soundPool.play(attack, 1, 1, 0, 0, 1);
+	}
     }
 
     @Override
@@ -66,30 +73,40 @@ public class MainActivity extends AndroidApplication implements
     @Override
     public void soundWin() {
 	// TODO Auto-generated method stub
-	soundPool.play(win, 1, 1, 0, 0, 1);
+	if (GameControl.isSound) {
+	    soundPool.play(win, 1, 1, 0, 0, 1);
+	}
     }
 
     @Override
     public void soundLose() {
 	// TODO Auto-generated method stub
-	soundPool.play(lose, 1, 1, 0, 0, 1);
+	if (GameControl.isSound) {
+	    soundPool.play(lose, 1, 1, 0, 0, 1);
+	}
     }
 
     @Override
     public void soundHeartDie() {
 	// TODO Auto-generated method stub
-	soundPool.play(heart_die, 1, 1, 0, 0, 1);
+	if (GameControl.isSound) {
+	    soundPool.play(heart_die, 1, 1, 0, 0, 1);
+	}
     }
 
     @Override
     public void soundStartWave() {
 	// TODO Auto-generated method stub
-	soundPool.play(start_wave, 1, 1, 0, 0, 1);
+	if (GameControl.isSound) {
+	    soundPool.play(start_wave, 1, 1, 0, 0, 1);
+	}
     }
 
     @Override
     public void soundShowPopup() {
 	// TODO Auto-generated method stub
-	soundPool.play(show_popup, 1, 1, 0, 0, 1);
+	if (GameControl.isSound) {
+	    soundPool.play(show_popup, 1, 1, 0, 0, 1);
+	}
     }
 }
